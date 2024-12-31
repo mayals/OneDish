@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header.jsx';
+import Row1 from './Row1.jsx';
 // import Navbar from '../Navbar.jsx';
 // import Row1 from './Row1.jsx';
 // import Aboutus from './Aboutus.jsx';
@@ -16,7 +17,8 @@ import Header from './Header.jsx';
 const HomePage = () => {
     return (
         <section>
-                <Header />
+                <Header/>
+                <Row1 />
                     {/* <Navbar/>
                         <div id='home'>    
                             <Row1 />
