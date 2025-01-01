@@ -1,8 +1,10 @@
 import React from 'react';
 import Header from './Header.jsx';
-import Row1 from './Row1.jsx';
-// import Navbar from '../Navbar.jsx';
-// import Row1 from './Row1.jsx';
+import Navbar from "./Navbar.jsx"
+import Jumbotron from './Jumbotron.jsx';
+import MainMeal from './MainMeal.jsx';
+
+
 // import Aboutus from './Aboutus.jsx';
 // import Row2 from './Row2.jsx';
 // import Row3 from './Row3.jsx';
@@ -16,9 +18,11 @@ import Row1 from './Row1.jsx';
 
 const HomePage = () => {
     return (
-        <section>
+        <section className='font-bodyFont'>
                 <Header/>
-                <Row1 />
+                <Navbar/>
+                <Jumbotron/>
+                <MainMeal />
                     {/* <Navbar/>
                         <div id='home'>    
                             <Row1 />

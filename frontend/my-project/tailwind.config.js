@@ -13,22 +13,28 @@ export default {
   theme: {
     extend: {
 
+      // colors
       colors: {
-        beige: {
-          100: '#fdf3e7', // Soft beige (plate color)
-        },
-        tomato: {
-          600: '#e63946', // Tomato red (sauce color)
-        },
-        basil: {
-          600: '#457b9d', // Basil green
-        },
-      },
+            beige: {
+              100: '#fdf3e7', // Soft beige (plate color)
+            },
+            tomato: {
+              600: '#e63946', // Tomato red (sauce color)
+            },
+            basil: {
+              600: '#457b9d', // Basil green
+            },
+          },
 
+
+      // font
+      fontFamily: {
+                    "bodyFont": ['Tajawal', 'sans-serif']
+                  }
     },
   },
 
 
-  
+
   plugins: [],
 }
