@@ -4,8 +4,20 @@ import { useContext } from "react";
 import { MainMealContext } from "./MainMealContext";
 
 const MainMeal = () => {
-    const { meal } = useContext(MainMealContext);
+    const { meal, setMeal } = useContext(MainMealContext);
     console.log("from context MainMealContext =", meal);
+    
+    
+    //  for update state value
+    const updateMeal = () => {
+
+            setMeal((prevMeal) => ({
+                ...prevMeal,
+                price: prevMeal.price + 5, // Example: Incrementing price
+            }));
+    };
+
+   
 
 
   return(
