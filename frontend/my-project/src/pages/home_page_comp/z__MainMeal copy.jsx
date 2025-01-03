@@ -1,13 +1,6 @@
 // MainMeal.jsx 
 
-import { useContext } from "react";
-import { MainMealContext } from "./MainMealContext";
-
-const MainMeal = () => {
-    const { meal } = useContext(MainMealContext);
-    console.log("from context MainMealContext =", meal);
-
-
+const MainMeal= () =>{
   return(
 
         <section className="bg-gray-100 mt-0" id="aboutus">
