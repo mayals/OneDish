@@ -22,11 +22,11 @@ const Navbar = () => {
                 <div className="flex justify-between items-center px-4 md:hidden">
                     <div className="flex items-center space-x-2">
                         <img src={logo} alt="OneDish Logo" className="w-10 h-10" />
-                        <span className="text-3xl md:text-2xl font-bold text-[#e52609]">OneDish <span className='text-xs text-gray-500'>daily</span></span>
+                        <span className="text-xl font-bold text-tomato-600">OneDish Daily</span>
                     </div>
                     <button onClick={toggleMobileMenu}>
                         <img
-                            className="h-10 w-10 focus:ring-4 focus:ring-teal-500 focus:outline-none hover:outline-none"
+                            className="h-10 w-10"
                             src={isMobileMenuVisible ? closeButton : menuButton}
                             alt="Menu Toggle"
                         />
@@ -35,31 +35,31 @@ const Navbar = () => {
 
                 {/* Mobile Menu Links */}
                 {isMobileMenuVisible && (
-                    <div className="md:hidden bg-white py-4 px-6 bg-yellow-300">
+                    <div className="bg-white py-4 px-6 ">
                         <ul className="space-y-4 text-center md:flex md:justify-center">
                             <li>
-                                <NavLink to="/" className="text-lg text-gray-700 hover:text-[#bc9b79]">
+                                <NavLink to="/" className="text-lg text-gray-700 hover:text-teal-500">
                                     Home
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/products" className="text-lg text-gray-700 hover:text-[#bc9b79]">
+                                <NavLink to="/products" className="text-lg text-gray-700 hover:text-teal-500">
                                     Products
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/pricing" className="text-lg text-gray-700 hover:text-[#bc9b79]">
+                                <NavLink to="/pricing" className="text-lg text-gray-700 hover:text-teal-500">
                                     Pricing
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/contact" className="text-lg text-gray-700 hover:text-[#bc9b79]">
+                                <NavLink to="/contact" className="text-lg text-gray-700 hover:text-teal-500">
                                     Contact
                                 </NavLink>
                             </li>
                         </ul>
                         <div className="text-center mt-4">
-                            <button className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                            <button className="text-white bg-teal-500 hover:bg-teal-600 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
                                 Create Account
                             </button>
                         </div>
@@ -67,41 +67,40 @@ const Navbar = () => {
                 )}
 
                 {/* Full-Screen Navbar */}
-                <div className="hidden md:flex md:justify-between md:items-center px-8">
-                    {/* Navigation Links */}
-                    <ul className="md:flex md:items-center md:justify-center md:space-x-8 flex-grow text-center">
+                <div className="hidden md:flex justify-between items-center px-8">
+                    <ul className="flex items-center justify-center space-x-8">
                         <li className="text-lg text-gray-700 hover:text-teal-500 relative group">
-                            <NavLink>
+                            <NavLink 
+                                className="cursor-pointer p-1 text-center transition-all duration-300 ease-in-out">
                                 Home
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#bc9b79] transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
                             </NavLink>
                         </li>
                         <li className="text-lg text-gray-700 hover:text-teal-500 relative group">
-                            <NavLink>
+                            <NavLink 
+                                className="cursor-pointer p-1 text-center transition-all duration-300 ease-in-out">
                                 Products
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#bc9b79] transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
                             </NavLink>
                         </li>
                         <li className="text-lg text-gray-700 hover:text-teal-500 relative group">
-                            <NavLink>
+                            <NavLink 
+                                className="cursor-pointer p-1 text-center transition-all duration-300 ease-in-out">
                                 Pricing
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#bc9b79] transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
                             </NavLink>
                         </li>
                         <li className="text-lg text-gray-700 hover:text-teal-500 relative group">
-                            <NavLink>
+                            <NavLink 
+                                className="cursor-pointer p-1 text-center transition-all duration-300 ease-in-out">
                                 Contact
-                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#bc9b79] transition-all duration-300 group-hover:w-full"></span>
+                                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-teal-500 transition-all duration-300 group-hover:w-full"></span>
                             </NavLink>
                         </li>
                     </ul>
-
-                    {/* Call-to-Action Button */}
-                    <div className="ml-8">
-                        <button className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                            Create Account
-                        </button>
-                    </div>
+                    <button className="text-white bg-teal-500 hover:bg-teal-600 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                        Create Account
+                    </button>
                 </div>
             </nav>
         </section>

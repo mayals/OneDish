@@ -14,10 +14,9 @@ const SideMeals = () => {
 
     return (
         <section className="text-gray-700" id="gallery">
-                <h2 className="flex justify-items-center justify-center text-3xl font-bold text-gray-800 text-center py-10">
-                    Side Meals
-                </h2>
-                <div className="md:flex md:justify-around md:align-center items-center text-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-100 mb-0 text-center pt-12">الوجبات الجانبية</h2>
+
+                <div className="md:flex py-16 md:justify-around md:align-center items-center text-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         
                         {sideMeals.map((smObj) => (
 

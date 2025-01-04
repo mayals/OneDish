@@ -15,11 +15,11 @@ const Header = () => {
                     alt="OneDish Logo"
                     className="w-10 h-10"
                     />
-                    <span className="text-3xl font-bold text-[#bb9a79]">OneDish <span className='font-sans text-xs'>daily</span></span>
+                    <span className="text-xl font-bold text-tomato-600">OneDish daily</span>
                 </div>
 
                 {/* Phone Number */}
-                <div className="flex items-center space-x-2 text-[#8b9797]">
+                <div className="flex items-center space-x-2 text-tomato-600">
                     <img
                         src={whatsappSvg} 
                         alt="whatsappSvg"
@@ -29,7 +29,7 @@ const Header = () => {
                 </div>
 
                 {/* Working Hours */}
-                <div className="flex items-center space-x-2 text-[#8b9797]">
+                <div className="flex items-center space-x-2 text-basil-600">
                     <img
                         src={timeSvg } 
                         alt="timeSvg"
