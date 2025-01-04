@@ -5,16 +5,16 @@
 export const sideMealsData = [
     {
       "id": 1,
-      "name": "cola",
+      "name": "Ice Tea",
       "price": 15,
-      "descriptions": "cola",
+      "descriptions": "Ice Tea",
       "discount": 0,
       "size": "1.5",
       "caloriesPerServing": 200,
-      "image": "https://img.freepik.com/free-photo/fresh-cola-drink-glass_144627-16208.jpg",
+      "image": "https://img.freepik.com/free-photo/fresh-ice-tea-with-ice-strawberries_144627-6592.jpg",
       "rating": 4.6,
       "reviewCount": 3,
-      "tags": [ "cola","cold"],
+      "tags": [ "tea","cold","strawberries"],
   },{
       "id": 2,
       "name": "salat",
@@ -23,7 +23,6 @@ export const sideMealsData = [
       "discount": 3,
       "size": "100 غم",
       "caloriesPerServing": 7,
-      
       "image": "https://img.freepik.com/free-photo/front-close-view-vegan-salad-with-fresh-ingredients-plate-black-board_179666-47156.jpg",
       "rating": 4.7,
       "reviewCount": 5,
