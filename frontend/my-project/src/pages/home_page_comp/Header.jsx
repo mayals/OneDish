@@ -5,7 +5,7 @@ import timeSvg from '../../assets/time-2-svgrepo-com.svg'
 
 const Header = () => {
     return (
-        <header className="bg-black fixed top-0 left-0 w-full z-50 drop-shadow-lg">
+        <header className="bg-black fixed top-0 left-0 w-full md:z-50 z-50 drop-shadow-lg">
             <div className="container mx-0 flex justify-around md:justify-between items-center px-4 py-1 sm:px-6">
                 
                 {/* Logo and Restaurant Name */}

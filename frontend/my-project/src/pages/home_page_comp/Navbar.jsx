@@ -16,11 +16,11 @@ const Navbar = () => {
     };
 
     return (
-        <section className="mt-5 md:mt-10 transition-all duration-500 drop-shadow-lg md:fixed md:flex md:w-full md-mx-0">
+        <section className="fixed mt-0 w-full mx-0 mt-5 md:mt-10 transition-all duration-500 drop-shadow-lg md:fixed md:flex md:w-full md-mx-0 md:z-40 z-40">
             <nav className="pt-3 pb-3 bg-white md:w-full">
                 {/* Mobile Navbar */}
                 <div className="flex justify-between items-center px-4 md:hidden">
-                    <div className="flex items-center space-x-2">
+                    <div className="flex  -center space-x-2">
                         <img src={logo} alt="OneDish Logo" className="w-10 h-10" />
                         <span className="text-3xl md:text-2xl font-bold text-[#e52609]">OneDish <span className='text-xs text-gray-500'>daily</span></span>
                     </div>
@@ -35,7 +35,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Links */}
                 {isMobileMenuVisible && (
-                    <div className="md:hidden bg-white py-4 px-6 bg-yellow-300">
+                    <div className="md:hidden bg-white py-4 px-6 bg-yellow-300 md:z-40 z-40">
                         <ul className="space-y-4 text-center md:flex md:justify-center">
                             <li>
                                 <NavLink to="/" className="text-lg text-gray-700 hover:text-[#bc9b79]">
