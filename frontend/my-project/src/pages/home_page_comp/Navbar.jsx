@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import logo from "../../assets/oneDishLogo.jpg"
+import menuButton from "../../assets/menu-symbol-of-three-parallel-lines-svgrepo-com.svg"
+import closeButton from "../../assets/close-bold-svgrepo-com.svg"
+
 
 
 const Navbar = () => {
@@ -9,6 +12,7 @@ const Navbar = () => {
     // navbar buttons:
     // MobileMenu button only in mobile size
     const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
+    
     
     useEffect(()=>{
         setIsMobileMenuVisible(false)
@@ -39,15 +43,29 @@ const Navbar = () => {
                     </div>
                     {/* Mobile button */}
                     <div className="flex md:hidden">
+                        {!isMobileMenuVisible && (
                         <button  onClick={toggleMobileMenu}>
-                            <img className="toggle block" src="https://img.icons8.com/fluent-systems-regular/2x/menu-squared-2.png" width="48" height="48" />
+                            <img 
+                                className="h-10 w-10" 
+                                src={menuButton} 
+                            />
                             {/* <img className="toggle hidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="48" height="48" /> */}
-                        </button>
+                        </button>)}
+                    
+                        {isMobileMenuVisible && (
+                        <button  onClick={toggleMobileMenu}>
+                            <img 
+                                className="h-10 w-10" 
+                                src={closeButton} 
+                            />
+                            {/* <img className="toggle hidden" src="https://img.icons8.com/fluent-systems-regular/2x/close-window.png" width="48" height="48" /> */}
+                        </button>  )}
+                   
                     </div>
                 </div> 
                 {/* Mobile screen menue links  view after click button */}
                 {isMobileMenuVisible && (
-                    <div className='md:hidden bg-mybody h-fit w-full mt-2 items-center py-3 shadow-lg border-t-2 border-[#7425ff]'>
+                    <div className='md:hidden bg-mybody h-fit w-full mt-2 items-center py-3 shadow-lg border-t-2 border-white'>
                         <ul className="md:hidden flex flex-col gap-3">
 
                             <li className='text-lg  pt-4 pb-4 text-center'>
