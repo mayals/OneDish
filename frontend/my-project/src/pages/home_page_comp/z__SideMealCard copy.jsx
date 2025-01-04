@@ -7,7 +7,7 @@ const SideMealCard = ({ smObj }) => {
 
     return (
         <section>
-            <div className="p-2">
+            <div className="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 <div className="group relative">
                     <img
                         src={smObj.image}

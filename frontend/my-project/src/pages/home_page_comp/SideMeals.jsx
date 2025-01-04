@@ -13,13 +13,22 @@ const SideMeals = () => {
     }
 
     return (
-        <section className="text-gray-700 body-font" id="gallery">
-            <h2 className="flex justify-center text-3xl font-bold text-gray-800 text-center py-10">
-                Side Meals
-            </h2>
-            {sideMeals.map((smObj) => (
-                <SideMealCard key={smObj.id} smObj={smObj} />
-            ))}
+        <section className="text-gray-700" id="gallery">
+                <h2 className="flex justify-items-center justify-center text-3xl font-bold text-gray-800 text-center py-10">
+                    Side Meals
+                </h2>
+                <div className="md:flex md:justify-around md:align-center items-center text-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        
+                        {sideMeals.map((smObj) => (
+
+                            <SideMealCard 
+                                        key={smObj.id} 
+                                        smObj={smObj}    
+                            />
+
+                        ))}
+                        
+                </div>
         </section>
     );
 };
