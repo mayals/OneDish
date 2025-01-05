@@ -2,7 +2,7 @@
 import React from "react";
 import weightSvg from "../../assets/weight-scale-svgrepo-com.svg"
 import kcalSvg from "../../assets/calories-svgrepo-com.svg"
-
+import Circle from "./Circle"
 
 
 const SideMealCard = ({ smObj }) => {
@@ -22,6 +22,13 @@ const SideMealCard = ({ smObj }) => {
         // </section>
         <section className="flex justify-center items-center py-8 md:z-0 z-0">
                 <div className="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden group">
+                        
+                        <div className="absolute mt-2 mx-2 group-hover:scale-105 bg-gray-700 md:z-0 z-0 rounded-full h-fit w-fit p-1">
+                            <span className="text-3xl text-white">
+                                #{smObj.id}
+                            </span>   
+                        </div>
+                        
                         <img
                             src={smObj.image}
                             alt={smObj.name}
@@ -37,13 +44,13 @@ const SideMealCard = ({ smObj }) => {
                                     <h3 className="font-bold text-2xl text-gray-800 mb-2">
                                         {smObj.name}
                                     </h3>
-                                    {/* Green Circle */}
-                                    <div className="absolute -top-[-24] left-1/2 transform -translate-x-1/2 bg-green-500 h-24 w-24 flex items-center justify-center rounded-full shadow-lg">
-                                        <h2 className="font-bold text-3xl text-white">
-                                            {smObj.price} Dhs
-                                        </h2>
+
+                                    {/* price label Circle */}
+                                    <div className="h-24 w-24">
+                                        <Circle price={smObj.price} />
                                     </div>
-                                    <p className="text-gray-600 mt-32 text-base mb-4">
+
+                                    <p className="text-gray-600 mt-12 text-base mb-4 font-semibold">
                                         {smObj.descriptions}
                                     </p>
                             </div>
