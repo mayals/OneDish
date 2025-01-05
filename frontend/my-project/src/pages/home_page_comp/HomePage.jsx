@@ -4,7 +4,7 @@ import Navbar from "./Navbar.jsx"
 import Jumbotron from './Jumbotron.jsx';
 import MainMeal from './MainMeal.jsx';
 import SideMeals from './SideMeals.jsx';
-
+import OurLocation from './OurLocation.jsx';
 
 // import Row2 from './Row2.jsx';
 // import Row3 from './Row3.jsx';
@@ -24,6 +24,7 @@ const HomePage = () => {
                 <Jumbotron/>
                 <MainMeal />
                 <SideMeals/>
+                <OurLocation/>
                     {/* <Navbar/>
                         <div id='home'>    
                             <Row1 />

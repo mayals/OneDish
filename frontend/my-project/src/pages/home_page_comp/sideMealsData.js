@@ -43,7 +43,7 @@ export const sideMealsData = [
       "id": 4,
       "name": "عصير برتقال",
       "price": 20,
-      "descriptions": "عصير برتقال طبيعي وطازج بدون إضافة أصباغ وبدون سكر مضاف",
+      "descriptions": "عصير برتقال طبيعي وطازج بدون إضافة أصباغ",
       "discount": 1,
       "size": "0.50 L",
       "caloriesPerServing":100,

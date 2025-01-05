@@ -34,6 +34,19 @@ const MainMeal = () => {
                 <div className="container py-16 px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 flex md:justify-around items-center gap-8">
                         
+                        
+                        <div className="absolute mt-[32px] mx-16 mt-16  bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
+                            <span className="text-3xl text-white">
+                                #{meal.id}
+                            </span>   
+                        </div>
+                        <div className="flex justify-center items-center">
+                            <img src="https://img.freepik.com/free-photo/pasta-with-cheese-cherry-tomatoes_661915-51.jpg" alt="Main Meal Image" className="object-cover rounded-lg shadow-md"/>
+                        </div>
+
+                        
+                        
+                        
                         <div className="justify-center items-center max-w-lg ltr:ml-3 rtl:mr-3">
                             <h3 className="font-bold text-4xl text-[#5e6700] mb-2 text-center">
                                 {meal.name}
@@ -84,14 +97,7 @@ const MainMeal = () => {
 
 
                         
-                            <div className="absolute mt-[32px] mx-16 mt-16  bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
-                                <span className="text-3xl text-white">
-                                    #{meal.id}
-                                </span>   
-                            </div>
-                            <div className="flex justify-center items-center">
-                            <img src="https://img.freepik.com/free-photo/pasta-with-cheese-cherry-tomatoes_661915-51.jpg" alt="Main Meal Image" className="object-cover rounded-lg shadow-md"/>
-                        </div>
+
                     </div>
                 </div>
         </section>
