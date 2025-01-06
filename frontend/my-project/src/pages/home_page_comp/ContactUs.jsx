@@ -7,12 +7,13 @@ import snapchatHoverSvg from "../../assets/snapchat-color-svgrepo-com.svg"
 
 const ContactUs = () => {
     return (
-        <section className="text-gray-600 body-font bg-yellow-100 mt-0 md:mt-0 " dir="rtl">
+        <section className="text-gray-600 body-font bg-yellow-100 mt-0 md:mt-0" dir="rtl">
+              
             <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-200 mb-0 text-center py-8 mt-2">
                 نسعد بتواصلك معنا
             </h2>
 
-            <div id="contact-form" className="container px-2  flex md:flex md:justify-between md:space-x-5 flex-col md:flex-row lg:max-w-5xl w-full px-5 py-12 md:py-24 mx-auto">
+            <div  className="container px-2 flex md:flex md:justify-between md:space-x-5 flex-col md:flex-row lg:max-w-5xl w-full px-5 py-12 md:py-24 mx-auto">
                 
                 {/*  text */}
                 <div className="rounded-lg shadow-xl bg-white p-3">
@@ -95,7 +96,7 @@ const ContactUs = () => {
 
                 {/* CONTACT FORM */} 
                 <div className="md:w-full w-full mt-10 md:mt-0 flex md:flex md:justify-center md:align-center">
-                    <form id="ContactUs" action="send-contact.php" method="post">
+                    <form  action="send-contact.php" method="post">
                         <div className="p-2 w-full">
                             <div className="relative">
                                 <label htmlFor="name" className="leading-7 py-4 text-lg text-gray-900">

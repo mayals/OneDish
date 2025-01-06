@@ -6,53 +6,40 @@ import MainMeal from './MainMeal.jsx';
 import SideMeals from './SideMeals.jsx';
 import OurLocation from './OurLocation.jsx';
 import ContactUs from "./ContactUs.jsx"
+import Footer from "./Footer.jsx"
 
-// import Row2 from './Row2.jsx';
-// import Row3 from './Row3.jsx';
-// import Services from './Services.jsx';
-// import Layer from './Layer.jsx';
-// import Carousel from './Carousel.jsx';
-// import Layer2 from './Layer2.jsx';
-// import Contactus from './Contactus.jsx';
-// import Footer from './Footer.jsx';
 
 
 const HomePage = () => {
     return (
-        <section className='font-bodyFont'>
-                <Header/>
-                <Navbar/>
-                <Jumbotron/>
-                <MainMeal />
-                <SideMeals/>
-                <OurLocation/>
-                <ContactUs />
-
-
-                    {/* <Navbar/>
-                        <div id='home'>    
-                            <Row1 />
-                        </div>   
-                        <div id='aboutus'>    
-                            <Aboutus />
-                        </div>   
-                            <Row2 />
-                            <Row3 />
-                        <div id='services'>   
-                            <Services />
-                        </div>
-                            <Layer />
-                            <Carousel />
-                            <Layer2 />
-                        <div id='contactus'>    
-                            <Contactus />
-                        </div>
-                        <div id='socialMedia'>    
-                            <socialMedia />
-                        </div>
-
-                <Footer /> */}
-        </section>
+            <section className='font-bodyFont'>
+                    
+                    <div id='header'>    
+                        <Header/>
+                    </div>
+                    <div id='navbar'> 
+                        <Navbar/>
+                    </div>
+                    <div id='jumbotron'> 
+                        <Jumbotron/>
+                    </div>
+                    {/* <div id='mainmeal'>  */}
+                        <MainMeal />
+                    {/* </div> */}
+                    {/* <div id='sidemeal'>  */}
+                        <SideMeals/>
+                    {/* </div> */}
+                    {/* <div id='ourlocation'>  */}
+                        <OurLocation/>
+                    {/* </div> */}
+                    {/* <div id='contactus'>  */}
+                        <ContactUs />
+                    {/* </div> */}
+                    <div id='footer'> 
+                        <Footer/>
+                    </div>
+                    
+            </section>
     );
 }
 

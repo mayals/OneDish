@@ -25,7 +25,7 @@ const Header = () => {
                         alt="whatsappSvg"
                         className="w-5 h-5"
                     />
-                    <span className="text-sm font-medium">+1 (555) 123-4567</span>
+                    <span className="text-sm font-medium lining-nums">+966 (050) 966-4567</span>
                 </div>
 
                 {/* Working Hours */}
@@ -35,7 +35,7 @@ const Header = () => {
                         alt="timeSvg"
                         className="w-5 h-5"
                     />
-                    <span className="text-sm font-medium">Mon - Fri: 9:00 AM - 5:00 PM</span>
+                    <span className="text-sm font-medium">Mon - Fri: 9:00 AM - 11:00 PM</span>
                 </div>
             </div>
         </header>

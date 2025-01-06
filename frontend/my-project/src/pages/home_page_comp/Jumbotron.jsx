@@ -13,7 +13,7 @@ const Jumbotron = () => {
 
     return (
   
-      <section className="bg-[#8b9797] bg-blend-multiply w-full mb-0 h-screen bg-center bg-no-repeat bg-cover bg-[url('https://img.freepik.com/free-photo/raw-tagliatelle-rigatoni-with-copy-space_23-2148360782.jpg')]">
+      <section  className="bg-[#8b9797] bg-blend-multiply w-full mb-0 h-screen bg-center bg-no-repeat bg-cover bg-[url('https://img.freepik.com/free-photo/raw-tagliatelle-rigatoni-with-copy-space_23-2148360782.jpg')]">
           <div className="px-4 max-w-screen-xl text-center py-24 lg:py-56">
                 {/* Title */}
                 <h1 className="mb-6 text-5xl font-extrabold text-white md:text-6xl lg:text-7xl md:z-0">
@@ -31,6 +31,7 @@ const Jumbotron = () => {
                 Today's dish is special and carefully selected!
                 Enjoy one unforgettable meal every day—a unique experience awaits you.
                 </p>
+                <span id="mainmeal"></span>
           </div>
       </section>
     );

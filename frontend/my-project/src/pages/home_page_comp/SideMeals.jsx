@@ -13,7 +13,7 @@ const SideMeals = () => {
     }
 
     return (
-        <section className="text-gray-700" id="gallery md:z-0 z-0">
+        <section className="text-gray-700 md:z-0 z-0">
                 <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-100 mb-0 text-center pt-12">الوجبات الجانبية</h2>
 
                 <div className="md:z-0 md:flex py-16 md:space-x-1 md:justify-around md:align-center md:items-center items-center text-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -26,8 +26,10 @@ const SideMeals = () => {
                             />
 
                         ))}
-                        
+
+ 
                 </div>
+               
         </section>
     );
 };

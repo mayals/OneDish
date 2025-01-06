@@ -78,9 +78,15 @@ const SideMealCard = ({ smObj }) => {
                                         <span className="font-semibold">{smObj.rating}</span>({smObj.reviewCount})
                                     </span>
                                 </div>
-                        </div>
-                     
+
+                            
+                          
+                           </div>
+                      
+                
                 </div>
+                  
+               
         </section>
 
     )

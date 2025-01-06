@@ -26,15 +26,14 @@ const MainMeal = () => {
 
 
   return(
-
-    
-
-        <section className="bg-gray-100 mt-0" id="aboutus">
-           <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-100 mb-0 text-center pt-12">الوجبة الرئيسية</h2>
+        <section  className="bg-gray-100 mt-0">
+       
+           <h2  className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-100 mb-0 text-center pt-12">الوجبة الرئيسية</h2>
+                
                 <div className="container py-16 px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 flex md:justify-around items-center gap-8">
                         
-                        
+
                         <div className="absolute mt-[32px] mx-16 mt-16  bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
                             <span className="text-3xl text-white">
                                 #{meal.id}
@@ -92,14 +91,12 @@ const MainMeal = () => {
                                         </span>
                                     </div>
                             </div>
-
-                        </div>
-
-
                         
-
+                        </div>
+                        <span id="sidemeal"></span>
                     </div>
                 </div>
+                 
         </section>
   )
 }
