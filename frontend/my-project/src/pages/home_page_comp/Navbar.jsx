@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom'; // Ensure you have this import
-
+// https://www.npmjs.com/package/react-anchor-link-smooth-scroll
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import logo from "../../assets/oneDishLogo.jpg";
 import menuButton from "../../assets/menu-symbol-of-three-parallel-lines-svgrepo-com.svg";
@@ -46,7 +45,7 @@ const Navbar = () => {
                             </li>
                             <li>
                             <AnchorLink href="#mainmeal" className="text-lg text-gray-700 hover:text-[#bc9b79]">
-                                 الوجبة الأساسية  
+                                الوجبة الأساسية  
                             </AnchorLink>
                             </li>
                             <li>

@@ -13,7 +13,7 @@ const Header = () => {
                     <img
                     src={logo} 
                     alt="OneDish Logo"
-                    className="w-10 h-10"
+                    className="w-10 h-10 rounded-full border-2 border-gray-300 shadow-md"
                     />
                     <span className="text-3xl font-bold text-[#bb9a79]">OneDish <span className='font-sans text-xs'>daily</span></span>
                 </div>
