@@ -1,7 +1,7 @@
 import twirtterSvg from "../../assets/social-twitter-svgrepo-com.svg"
 import snapchatSvg from "../../assets/snapchat-color-svgrepo-com (1).svg"
 import snapchatHoverSvg from "../../assets/snapchat-color-svgrepo-com.svg"
-import {paper}from "../../assets/paper-clip-svgrepo-com.svg"
+
 
 
 
@@ -140,7 +140,7 @@ const ContactUs = () => {
                         <div className="p-2 w-full">
                             <button
                                 type="submit"
-                                className="flex text-white bg-[#bb9a79] border-0 py-2 px-6 focus:outline-none focus:bg-black  hover:bg-[#6C563F] rounded text-xl font-bold shadow-lg mx-0 flex-col text-center g-recaptcha"
+                                className="flex text-white bg-[#bb9a79] border-0 py-2 px-6 focus:outline-none focus:bg-black  hover:bg-[#6C563F] rounded text-xl font-bold shadow-lg mx-0 flex-col text-center g-recaptcha transition-all duration-300"
                             >
                                 إرسال الرسالة ✉
                             </button>
