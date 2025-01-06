@@ -2,7 +2,7 @@ const OurLocation = ()=> {
   
 
     return (
-        <section id='OurLocation' className=' md:mx-32 mx-2 pt-[5px] md:pt-[5px] items-center mt-0 md:mt-0  ltr:ml-3 rtl:mr-3'>
+        <section id='OurLocation' className=' md:mx-32 mx-2 pt-[5px] md:pt-[5px] items-center mt-0 md:mt-0  ltr:ml-3 rtl:mr-3 mb-0 md:mb-0'>
                 
                 <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-200 mb-0 text-center py-8 mt-2">عنواننا</h2>
                 
@@ -17,9 +17,9 @@ const OurLocation = ()=> {
 
                     {/* adress text */}
                     <div className="ml-5 text-right rtl flex-row-reverse">
-                                <div className="border-t border-gray-200 px-4 py-5 sm:p-0">
+                                <div className="border-t border-gray-200 px-4 sm:p-0">
                                     <div className="sm:divide-y sm:divide-gray-200">
-                                        <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                             <dt className="text-sm font-medium text-gray-500">
                                             ون دش
                                             </dt>

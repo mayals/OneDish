@@ -5,6 +5,7 @@ import Jumbotron from './Jumbotron.jsx';
 import MainMeal from './MainMeal.jsx';
 import SideMeals from './SideMeals.jsx';
 import OurLocation from './OurLocation.jsx';
+import ContactUs from "./ContactUs.jsx"
 
 // import Row2 from './Row2.jsx';
 // import Row3 from './Row3.jsx';
@@ -25,6 +26,9 @@ const HomePage = () => {
                 <MainMeal />
                 <SideMeals/>
                 <OurLocation/>
+                <ContactUs />
+
+
                     {/* <Navbar/>
                         <div id='home'>    
                             <Row1 />
