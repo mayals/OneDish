@@ -7,7 +7,7 @@ import snapchatHoverSvg from "../../assets/snapchat-color-svgrepo-com.svg"
 
 const ContactUs = () => {
     return (
-        <section className="text-gray-600 body-font bg-yellow-100 mt-0 md:mt-0" dir="rtl">
+        <section className="text-gray-600 body-font bg-yellow-100 mt-0 md:mt-3" dir="rtl">
               
             <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-900 to-orange-200 mb-0 text-center py-8 mt-2">
                 نسعد بتواصلك معنا

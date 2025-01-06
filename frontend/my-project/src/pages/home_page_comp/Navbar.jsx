@@ -37,7 +37,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Links */}
                 {isMobileMenuVisible && (
-                    <div className="md:hidden bg-white py-4 px-6 bg-yellow-300 md:z-40 z-40">
+                    <div className="md:hidden bg-white py-4 px-6  md:z-40 z-40">
                         <ul className="space-y-4 text-center md:flex md:justify-center">
                             <li>
                                 <AnchorLink href="#jumbotron" className="text-lg text-gray-700 hover:text-[#bc9b79]">
