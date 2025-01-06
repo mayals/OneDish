@@ -34,7 +34,7 @@ const MainMeal = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 flex md:justify-around items-center gap-8">
                         
 
-                        <div className="absolute mt-[32px] mx-16 mt-16  bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
+                        <div className="absolute md:mt-[-600px] md:mx-[95px] mt-[-1350px] mx-[38px] bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
                             <span className="text-3xl text-white">
                                 #{meal.id}
                             </span>   
