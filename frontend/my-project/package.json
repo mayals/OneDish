@@ -1,7 +1,7 @@
 {
 
   "homepage": "https://mayals.github.io/OneDish",
-             
+
   "name": "my-project",
 
   "private": true,
@@ -29,6 +29,8 @@
   },
 
   "dependencies": {
+
+    "dist": "^0.1.2",
 
     "react": "^18.3.1",
 
