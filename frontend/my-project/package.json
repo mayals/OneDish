@@ -1,6 +1,6 @@
 {
 
-  "homepage": "https://mayals.github.io/OneDish",
+  "homepage": "https://mayals.github.io/OneDish/",
 
   "name": "my-project",
 
@@ -31,6 +31,8 @@
   "dependencies": {
 
     "dist": "^0.1.2",
+
+    "gh-pages-deploy": "^0.5.1",
 
     "react": "^18.3.1",
 

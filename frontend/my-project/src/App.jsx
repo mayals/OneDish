@@ -7,7 +7,7 @@ const App = () =>{
 
         return (
         
-            <BrowserRouter>
+            <BrowserRouter basename='/OneDish/'>
                 <MainMealProvider>
                 <SideMealsProvider>
                     <Routes>
