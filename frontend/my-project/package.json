@@ -24,7 +24,7 @@
 
     "deploy": "gh-pages -d dist",
 
-    "clean": "rimraf node_modules gh-pages .cache"
+    "clean": "rm -rf dist"
 
   },
 
