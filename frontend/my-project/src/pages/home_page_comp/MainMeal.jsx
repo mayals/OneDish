@@ -33,14 +33,16 @@ const MainMeal = () => {
                 <div className="container py-16 px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 flex md:justify-around items-center gap-8">
                         
+                        <div className="">
+                            <div className="relative flex justify-center items-center">
+                                <img src="https://img.freepik.com/free-photo/pasta-with-cheese-cherry-tomatoes_661915-51.jpg" alt="Main Meal Image" className="object-cover rounded-lg shadow-md"/>
+                            </div>
 
-                        <div className="absolute md:mt-[-600px] md:mx-[95px] mt-[-1350px] mx-[38px] bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
-                            <span className="text-3xl text-white">
-                                #{meal.id}
-                            </span>   
-                        </div>
-                        <div className="flex justify-center items-center">
-                            <img src="https://img.freepik.com/free-photo/pasta-with-cheese-cherry-tomatoes_661915-51.jpg" alt="Main Meal Image" className="object-cover rounded-lg shadow-md"/>
+                            <div className="absolute mt-[-580px] ml-[5px] md:mt-[-600px] md:mx-[95px]  bg-gray-700 md:z-10 z-10 rounded-full h-fit w-fit p-1">
+                                <span className="text-3xl text-white">
+                                    #{meal.id}
+                                </span>   
+                            </div>
                         </div>
 
                         
@@ -60,7 +62,7 @@ const MainMeal = () => {
 
 
                             {/* price label Circle */}
-                            <div className="h-32 w-32 mx-28">
+                            <div className="h-32 w-32 mx-[22px]">
                                 <Circle price={meal.price} />
                             </div>
 

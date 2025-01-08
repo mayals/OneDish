@@ -13,8 +13,8 @@ const Jumbotron = () => {
 
     return (
   
-      <section  className="bg-[#8b9797] bg-blend-multiply w-full mb-0 h-screen bg-center bg-no-repeat bg-cover bg-[url('https://img.freepik.com/free-photo/raw-tagliatelle-rigatoni-with-copy-space_23-2148360782.jpg')]">
-          <div className="px-4 max-w-screen-xl text-center py-24 lg:py-56">
+      <section  className="bg-[#8b9797] bg-blend-multiply w-full  pb-10 bg-center bg-no-repeat bg-cover bg-[url('https://img.freepik.com/free-photo/raw-tagliatelle-rigatoni-with-copy-space_23-2148360782.jpg')]">
+          <div className="px-4 max-w-screen-xl text-center  pt-32 lg:py-56">
                 {/* Title */}
                 <h1 className="mb-6 text-5xl font-extrabold text-white md:text-6xl lg:text-7xl md:z-0">
                     <div className="z-0 bg-gradient-to-r from-yellow-400 via-red-300 to-yellow-400 bg-clip-text text-transparent px-2">

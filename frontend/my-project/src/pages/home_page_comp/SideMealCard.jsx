@@ -43,7 +43,7 @@ const SideMealCard = ({ smObj }) => {
                                     </h3>
 
                                     {/* price label Circle */}
-                                    <div className="h-24 w-24">
+                                    <div className="h-24 w-24 -mx-[60px]">
                                         <Circle price={smObj.price} />
                                     </div>
 

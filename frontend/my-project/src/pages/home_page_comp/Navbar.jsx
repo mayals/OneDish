@@ -18,7 +18,7 @@ const Navbar = () => {
 
     return (
         <section  className="fixed mt-0 w-full mx-0 mt-5 md:mt-10 transition-all duration-500 drop-shadow-lg md:fixed md:flex md:w-full md-mx-0 md:z-40 z-40">
-            <nav className="pt-3 pb-3 bg-white md:w-full">
+            <nav className="pt-7 pb-3 bg-white md:w-full">
                 {/* Mobile Navbar */}
                 <div className="flex justify-between items-center px-4 md:hidden">
                     <div className="flex  -center space-x-2">
@@ -36,7 +36,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu Links */}
                 {isMobileMenuVisible && (
-                    <div className="md:hidden bg-white py-4 px-6  md:z-40 z-40">
+                    <div className="md:hidden bg-white py-6 px-6  md:z-40 z-40">
                         <ul className="space-y-4 text-center md:flex md:justify-center">
                             <li>
                                 <AnchorLink href="#jumbotron" className="text-lg text-gray-700 hover:text-[#bc9b79]">
