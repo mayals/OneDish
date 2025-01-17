@@ -1,7 +1,4 @@
-// sideMealsData.js
-
-
-
+// sideMealsData.jsx
 export const sideMealsData = [
     {
       "id": 1,

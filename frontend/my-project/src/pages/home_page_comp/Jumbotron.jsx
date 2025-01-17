@@ -1,15 +1,5 @@
-import React from "react";
-import { useState } from "react";
-
-
-// https://img.freepik.com/free-photo/top-view-delicious-meat-soup-with-sliced-vegetables-grey-space_140725-75718.jpg" 
-
-
-
-
 
 const Jumbotron = () => {
-  
 
     return (
   
