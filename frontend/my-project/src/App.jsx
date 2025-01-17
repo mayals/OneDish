@@ -9,7 +9,10 @@ import Login from           "./pages/account_pages/Login";
 import Register from        "./pages/account_pages/Register";
 import VerifyeEmail from    "./pages/account_pages/VerifyeEmail";
 import Unauthorized from    "./pages/account_pages/Unauthorized";
+//  password
 import ForgetPassword from  "./pages/account_pages/ForgetPassword";
+import SetNewPassword from  "./pages/account_pages/SetNewPassword";
+import ChangePassword from  "./pages/account_pages/ChangePassword";
 
 // admin
 import AdminLayout from './pages_admin/admin_dashboard_pages/AdminLayout.jsx';
@@ -66,10 +69,14 @@ const App = () =>{
                         <Route path="/"                element={<HomePage />} />
                         <Route path="/login"           element={<Login />} />
                         <Route path="/register"        element={<Register />} />
-                        <Route path="/forget-password" element={<ForgetPassword />} />
                         <Route path="/verify-email"    element={<VerifyeEmail />} />
                         <Route path="/unauthorized"    element={<Unauthorized />} />
                         <Route path="*"                element={<h1>Page Not Found</h1>} />
+                        {/*   Forget Password */}
+                        <Route path="/forget-password" element={<ForgetPassword />} />
+                        <Route path="/set-new-password" element={<SetNewPassword />} />
+                        <Route path="/change-password" element={<ChangePassword/>} />
+                        
 
                         {/* ###################  Admin  ################# */}
                         {/*  only for admin - Need authentication */}
