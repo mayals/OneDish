@@ -56,7 +56,18 @@ INSTALLED_APPS = [
     # My local apps
     'meal.apps.MealConfig',
     'account.apps.AccountConfig',
+    
+    # Third party apps
+    # -----------------
+    # https://www.django-rest-framework.org/
+    'rest_framework',
+    # https://django-filter.readthedocs.io/en/stable/guide/usage.html#
+    'django_filters',
+    
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -180,3 +191,18 @@ DATABASES = {
 # AUTH_USER_MODEL = "myapp.MyUser"
 # https://docs.djangoproject.com/en/5.0/topics/auth/customizing/#changing-to-a-custom-user-model-mid-project
 AUTH_USER_MODEL = 'account.UserModel'
+
+
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#project-configuration
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
