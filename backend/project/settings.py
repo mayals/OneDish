@@ -206,3 +206,18 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+
+
+
+#2) to send OTP to verify email by  - SMTP Server of admin Gmail account :
+# -----------------------------------------------------------------------
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
+EMAIL_HOST = os.getenv('EMAIL_HOST')             # SMTP server address
+EMAIL_PORT = os.getenv('EMAIL_PORT')             # Port for TLS
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')       # Use TLS for secure connection
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')   # Your email address
+EMAIL_HOST_PASSWORD = 'gdiwiusahgyrzpli'         # Your email password or app-specific password
+
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')

@@ -6,6 +6,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('meal', include('meal.urls')),           # meal application url
-    path('account', include('account.urls')),     # account application url
+    path('meal/', include('meal.urls')),           # meal application url
+    path('account/', include('account.urls')),     # account application url
 ]

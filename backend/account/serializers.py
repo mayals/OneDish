@@ -44,81 +44,123 @@ class AdminProfileSerializer(serializers.ModelSerializer):
 class RegisteUserProfileSerializer(serializers.ModelSerializer):
     password       = serializers.CharField(max_length=68, min_length=6, write_only=True)
     password2      = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    profile        = serializers.SerializerMethodField()
+    client_profile       = serializers.SerializerMethodField()
+    admin_profile       = serializers.SerializerMethodField()
     
     class Meta:
         model = UserModel
-        fields = ['id', 'email', 'first_name', 'last_name', 'is_verifiedEmail', 'is_superuser ', 'is_client', 'is_active', 'is_staff', 'role']
-        extra_kwargs = {'password': {'write_only': True}}
-        read_only_fields = ['id', 'is_verifiedEmail', 'is_verifiedEmail', 'is_superuser ', 'is_client', 'is_active', 'is_staff', 'role'] 
+        fields = [
+            'id', 'email', 'first_name', 'last_name', 'password', 'password2',
+            'client_profile', 'admin_profile', 'is_verifiedEmail', 'is_superuser',
+            'is_client', 'is_active', 'is_staff', 'role'
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'password2': {'write_only': True},
+        }
+        read_only_fields = [
+            'id', 'is_verifiedEmail', 'client_profile', 'admin_profile',
+            'is_superuser', 'is_client', 'is_active', 'is_staff', 'role'
+        ]
     
-    def get_profile(self, obj): # obj is user object
-        if obj.is_client:
+    def get_client_profile(self, obj):
+        if hasattr(obj, 'client_profile'):
             try:
-                cp = obj.profile   # client_profile from Model ClientProfile related name='client_profile' , it is object created by signal
+                cp = obj.client_profile
                 return ClientProfileSerializer(cp).data
             except ClientProfile.DoesNotExist:
                 return None
+        return None
+            
         
-        if obj.is_superuser:
+    def get_admin_profile(self, obj):
+        # Only include admin_profile if the user is an admin
+        if obj.is_superuser and hasattr(obj, 'admin_profile'):
             try:
-                ap = obj.profile   # admin_profile from Model AdminProfile related name='admin_profile' , it is object created by signal
+                ap = obj.admin_profile
                 return AdminProfileSerializer(ap).data
             except AdminProfile.DoesNotExist:
                 return None
+        return None
+    
+    
+    def to_representation(self, instance):
+        """
+        Override the to_representation method to exclude admin_profile if it is None.
+        """
+        representation = super().to_representation(instance)
+        if representation['admin_profile'] is None:
+            representation.pop('admin_profile')  # Remove admin_profile from the response
+        return representation
+    
+    
+    
     
     def validate(self, attrs):
-        password  = attrs.get('password')
+        print('Validating data:', attrs)
+        password = attrs.get('password')
         password2 = attrs.get('password2')
-        if password | password2 ==  "" :
+        
+        # Check if either password or password2 is empty
+        if password == "" or password2 == "":
             raise serializers.ValidationError("The password field is required")
+        
+        # Check if passwords match
         if password != password2:
             raise serializers.ValidationError("Passwords do not match")
+        
         return attrs
+
 
     def validate_email(self, value):
         """
-        Validate that the email is  not empty and value is unique.
+        Validate that the email is not empty and is unique.
         """
-        if value is None:
-            raise serializers.ValidationError("The Email field is required")  
+        if not value:
+            raise serializers.ValidationError("The Email field is required")
+        
         if UserModel.objects.filter(email=value).exists():
             raise serializers.ValidationError("A user with this email already exists.")
+        
         return value
         
 
     def validate_first_name(self, value):
         """
-        Validate that the first_name is  not empty.
+        Validate that the first_name is not empty.
         """
-        if value is None:
-            raise serializers.ValidationError("The First Name field is required") 
+        if not value:
+            raise serializers.ValidationError("The First Name field is required")
         return value
 
     def validate_last_name(self, value):
         """
-        Validate that the last_name is  not empty.
+        Validate that the last_name is not empty.
         """
-        if value is None:
-            raise serializers.ValidationError("The Last Name field is required") 
+        if not value:
+            raise serializers.ValidationError("The Last Name field is required")
         return value
      
     def create(self, validated_data):
-        print('validated_data',validated_data)
-        valid_profile_data = validated_data.pop('profile',None) # pop client_profile_data from validated_data
-        
+        print('Creating user with data:', validated_data)
+        valid_client_profile_data = validated_data.pop('client_profile', None)
         user = UserModel.objects.create_user(
-                                    email=validated_data['email'],
-                                    first_name=validated_data['first_name'],
-                                    last_name=validated_data['last_name'],
-                                    password=validated_data['password'],
+            email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            password=validated_data['password'],
         )
-        if valid_profile_data:
+        if valid_client_profile_data:
             if user.is_client:
-                ClientProfile.objects.create(user=user, **valid_profile_data)
+                ClientProfile.objects.create(user=user, **valid_client_profile_data)
             if user.is_superuser:
-                AdminProfile.objects.create(user=user, **valid_profile_data)
+                AdminProfile.objects.create(user=user, **valid_client_profile_data)
         return user
+
+
+
+
+
 
 
 

@@ -32,11 +32,15 @@ class UserProfileRegisterAPIView(views.APIView):
       
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
+        print('serializer.initial_data=',serializer.initial_data)
         if serializer.is_valid():
+            print('valid serializer=',serializer)
             serializer.save()
             user = serializer.data
+            print('user=',user)
+            
             # send otp to email 
-            send_generated_otp_to_email(user.email, request)
+            send_generated_otp_to_email(user.get('email'), request)
             return response.Response({
                 'user': user,
                 'register_message': 'Thanks for signing up. A passcode has been sent to verify your email.'

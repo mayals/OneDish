@@ -74,6 +74,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
             self.is_verifiedEmail = True 
 
         else: 
+            self.is_client = True
             self.is_staff = False
             self.role = "Client" 
             self.is_verifiedEmail = False 
@@ -99,22 +100,6 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
             "refresh":str(refresh),
             "access" :str(refresh.access_token)
         }
-
-
-
-
-# ################################## OTP  - verifiedEmail #############################################33
-# otp need to verify user email 
-class OneTimePassword(models.Model):
-    id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  
-    user       = models.OneToOneField(UserModel, on_delete=models.CASCADE)
-    otp        = models.CharField(max_length=6)
-    created_at = models.DateTimeField(auto_now_add=True)
-     
-    def __str__(self):
-        return f"{self.user.email} - otp code"
-
-
 
 
 
@@ -178,4 +163,26 @@ class AdminProfile(models.Model):
             if old.profile_picture != self.profile_picture:
                 old.profile_picture.delete(save=False)
         super().save(*args, **kwargs) 
+
+
+
+
+
+
+
+
+# ################################## OTP  - verifiedEmail #############################################33
+# otp need to verify user email 
+class OneTimePassword(models.Model):
+    id         = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  
+    user       = models.OneToOneField(UserModel, on_delete=models.CASCADE)
+    otp        = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+     
+    def __str__(self):
+        return f"{self.user.email} - otp code"
+
+
+
+
 
