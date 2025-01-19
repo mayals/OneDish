@@ -38,14 +38,18 @@ class UserProfileRegisterAPIView(views.APIView):
             serializer.save()
             user = serializer.data
             print('user=',user)
-            
-            # send otp to email 
+             # send otp to email 
             send_generated_otp_to_email(user.get('email'), request)
             return response.Response({
                 'user': user,
                 'register_message': 'Thanks for signing up. A passcode has been sent to verify your email.'
             }, status=status.HTTP_201_CREATED)
-        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        if not serializer.is_valid():
+            print("Serializer errors:", serializer.errors)  # Log the errors
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+           
+       
 
 
 

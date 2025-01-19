@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     # -----------------
     # https://www.django-rest-framework.org/
     'rest_framework',
+    # https://pypi.org/project/django-cors-headers/
+    'corsheaders',
     # https://django-filter.readthedocs.io/en/stable/guide/usage.html#
     'django_filters',
     
@@ -72,6 +74,8 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # https://pypi.org/project/django-cors-headers/
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -221,3 +225,43 @@ EMAIL_HOST_PASSWORD = 'gdiwiusahgyrzpli'         # Your email password or app-sp
 
 EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+
+
+
+
+
+
+# specify allowed origins      ---  url from frontend                                   
+#############################################  django-cors-headers  ##############################################
+# https://pypi.org/project/django-cors-headers/
+
+# Allow all origins (for development only)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# OR allow specific origins
+CORS_ALLOW_CREDENTIALS=True
+CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+]
+# Allow all methods (GET, POST, etc.)
+CORS_ALLOW_METHODS = [
+            'DELETE',
+            'GET',
+            'OPTIONS',
+            'PATCH',
+            'POST',
+            'PUT',
+]
+# Allow all headers
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]

@@ -101,14 +101,9 @@ class RegisteUserProfileSerializer(serializers.ModelSerializer):
         password = attrs.get('password')
         password2 = attrs.get('password2')
         
-        # Check if either password or password2 is empty
-        if password == "" or password2 == "":
-            raise serializers.ValidationError("The password field is required")
-        
         # Check if passwords match
         if password != password2:
             raise serializers.ValidationError("Passwords do not match")
-        
         return attrs
 
 
@@ -145,11 +140,12 @@ class RegisteUserProfileSerializer(serializers.ModelSerializer):
         print('Creating user with data:', validated_data)
         valid_client_profile_data = validated_data.pop('client_profile', None)
         user = UserModel.objects.create_user(
-            email=validated_data['email'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-            password=validated_data['password'],
+                                    email=validated_data['email'],
+                                    first_name=validated_data['first_name'],
+                                    last_name=validated_data['last_name'],
+                                    password=validated_data['password']
         )
+        print("user=",user)
         if valid_client_profile_data:
             if user.is_client:
                 ClientProfile.objects.create(user=user, **valid_client_profile_data)
