@@ -70,12 +70,17 @@ class VerifyUserEmail(views.APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
                 otp = serializer.validated_data['otp']
+                print('otp=',otp)
+             
                 try:
                     user_pass_obj = get_object_or_404(OneTimePassword,otp=otp)
+                    print('user_pass_obj=', user_pass_obj)
                     user=user_pass_obj.user
-                    if not user.is_verifiedEmail:
+                    print('user from otp object=',user)
+                    if user.is_verifiedEmail == False :
                         user.is_verifiedEmail=True
                         user.save()
+                        print('User saved successfully') 
                         return response.Response({'message':'account email verified successfully'}, status=status.HTTP_200_OK)                                                      
                     return response.Response({'message':'passcode is invalid user is already verified'}, status=status.HTTP_204_NO_CONTENT)
                 except OneTimePassword.DoesNotExist:

@@ -77,7 +77,6 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
             self.is_client = True
             self.is_staff = False
             self.role = "Client" 
-            self.is_verifiedEmail = False 
         return super().save(*args, **kwargs)
     
     
