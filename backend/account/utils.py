@@ -1,9 +1,8 @@
 from django.core.mail import EmailMessage
-import random
 from django.conf import settings
 from .models import UserModel, OneTimePassword
 from django.contrib.sites.shortcuts import get_current_site
-
+import random
 
 #  email verify code ####
 def send_generated_otp_to_email(email, request): 

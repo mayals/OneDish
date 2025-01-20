@@ -20,6 +20,13 @@ import random
 from django.core.mail import EmailMessage
 from django.conf import settings
 
+ # send otp to email 
+from django.http import HttpResponse, JsonResponse
+
+
+from rest_framework_simplejwt.views import TokenObtainPairView
+   
+
 
 
 
@@ -90,10 +97,8 @@ class VerifyUserEmail(views.APIView):
 
 
 
- # send otp to email 
 
-from django.http import HttpResponse, JsonResponse
-
+# resend a new otp to email
 def ResendOTPToEmail(request, email):
     print('email=', email)
     user = UserModel.objects.filter(email=email)
@@ -128,15 +133,21 @@ def ResendOTPToEmail(request, email):
 
 
 ### login by email & password to get ACCESS TOKEN + REFRESH TOKEN  ###########
-class LoginUserView(views.APIView):
+class LoginUserView(TokenObtainPairView):
     serializer_class=LoginSerializer
     permission_classes=[permissions.AllowAny]
     
     def post(self, request):
         serializer= self.serializer_class(data=request.data, context={'request': request})
+        # print("Serializer.initial_data=", serializer.initial_data)
         if serializer.is_valid(raise_exception=True):
+           print(" valid Serializer.data=", serializer.data) 
            return response.Response(serializer.data, status=status.HTTP_200_OK)
-        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not serializer.is_valid():
+            print("Serializer errors:", serializer.errors)  # Log the errors
+            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+       
 
 
 

@@ -186,15 +186,15 @@ class LoginSerializer(serializers.ModelSerializer):
     first_name=serializers.CharField(max_length=100, read_only=True)
     last_name=serializers.CharField(max_length=100, read_only=True)
     full_name=serializers.CharField(max_length=255, read_only=True)
-    is_verified_email=serializers.BooleanField(read_only=True)
+    is_verifiedEmail=serializers.BooleanField(read_only=True)
     profile_picture=serializers.ImageField(read_only=True)
     access_token=serializers.CharField(max_length=255, read_only=True)
     refresh_token=serializers.CharField(max_length=255, read_only=True)
 
     class Meta:
         model = UserModel
-        fields = ['id','email','password', 'role','first_name', 'last_name', 'full_name', 'is_verified_email', 'profile_picture', 'access_token', 'refresh_token']
-        read_only_fields = ['id','role','full_name','first_name','last_name','is_verified_email','profile_picture','access_token', 'refresh_token']
+        fields = ['id','email','password', 'role', 'first_name', 'last_name', 'full_name', 'profile_picture', 'access_token', 'refresh_token', 'is_verifiedEmail']
+        read_only_fields = ['id','role','full_name','first_name','last_name','is_verifiedEmail','profile_picture','access_token', 'refresh_token']
     
     def validate(self, attrs):
         email = attrs.get('email')
@@ -203,18 +203,18 @@ class LoginSerializer(serializers.ModelSerializer):
         user = authenticate(request, email=email, password=password)
         if not user:
             raise AuthenticationFailed("invalid credential try again")
-        if not user.is_verified_email:
+        if not user.is_verifiedEmail:
             raise AuthenticationFailed("Email is not verified")
         tokens=user.tokens()
         
-        # only authenticated user with is_verified_email=True will be return
+        # only authenticated user with is_verifiedEmail=True will be return
         return {
             'id'                : user.id,
             'role'              : user.role,
             'email'             : user.email,
             'first_name'        : user.first_name,
             'last_name'         : user.last_name,
-            'is_verified_email' : user.is_verified_email,
+            'is_verifiedEmail'  : user.is_verifiedEmail,
             'full_name'         : user.get_full_name,
             'profile_picture'   : user.get_profile_picture,
             "access_token"      : str(tokens.get('access')),
@@ -272,8 +272,8 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = UserModel
-        fields = ['id', 'role','first_name', 'last_name','email','is_verified_email','date_joined','last_login', 'profile','full_name']
-        read_only_fields = ['id','is_verified_email', 'date_joined', 'last_login',
+        fields = ['id', 'role','first_name', 'last_name','email','is_verifiedEmail','date_joined','last_login', 'profile','full_name','is_verifiedEmail']
+        read_only_fields = ['id','is_verifiedEmail', 'date_joined', 'last_login',
                            'is_superuser', 'is_active', 'is_staff','is_client', 'is_employee','full_name'
                            ]  
 
@@ -324,13 +324,13 @@ class SimplifiedUserSerializer(serializers.ModelSerializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ['first_name', 'last_name', 'is_verified_email']
+        fields = ['first_name', 'last_name', 'is_verifiedEmail']
         read_only_fields = ('is_superuser', 'is_active', 'is_staff','role',)
 
         def update(self, instance, validated_data): # work ok 
             instance.first_name = validated_data.get('first_name', instance.first_name)
             instance.last_name  = validated_data.get('last_name', instance.last_name)
-            instance.is_verified_email  = validated_data.get('is_verified_email', instance.is_verified_email)
+            instance.is_verifiedEmail  = validated_data.get('is_verifiedEmail', instance.is_verifiedEmail)
             instance.save()
             user = UserModel(instance)
             user.save()
