@@ -67,9 +67,9 @@ const App = () =>{
                         {/* ###################  Visitor  ################# */}
                         {/* for all  visitors- allow any - No authentication */}
                         <Route path="/"                element={<HomePage />} />
-                        <Route path="/login"           element={<Login />} />
                         <Route path="/register"        element={<Register />} />
                         <Route path="/verify-email"    element={<VerifyeEmail />} />
+                        <Route path="/login"           element={<Login />} />
                         <Route path="/unauthorized"    element={<Unauthorized />} />
                         <Route path="*"                element={<h1>Page Not Found</h1>} />
                         {/*   Forget Password */}

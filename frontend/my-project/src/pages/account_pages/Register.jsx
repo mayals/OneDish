@@ -118,7 +118,7 @@ const Register = () => {
                 console.log('response.data=',response.data)
                 setLoading(false);
                 notify("Registration successful!", "success");
-                navigate("/login"); // Redirect to login page after successful registration
+                navigate("/verify-email"); // Redirect to login page after successful registration
         
           } catch (error) {
                 setLoading(false);
@@ -148,6 +148,9 @@ const Register = () => {
       {/* Register Form */}
       <div className="my-[20px] bg-white p-6 sm:p-8 rounded-lg shadow-lg max-w-md w-full mx-4 relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Create Your Account 🔐</h2>
+        
+        
+        
         <form noValidate  onSubmit={handleSubmit} >
           {/* Email Field */}
           <div className="mb-4">
