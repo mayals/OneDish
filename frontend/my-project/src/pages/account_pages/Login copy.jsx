@@ -4,10 +4,6 @@ import axios from "axios";
 import { AccountContext } from "./AccountContext";
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../Loading";
-import { baseURL } from "../../api/Api.js"
-
-
-
 
 const Login = () => {
     const navigate = useNavigate();
@@ -41,27 +37,21 @@ const Login = () => {
             return;
         }
 
-         
-        // Create FormData object
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("password", password);
-       
-        // Log the values using the get method
-        console.log('formData.email=', formData.get('email'));
-        console.log('formData.password=', formData.get('password'));
-        ///////////////////////////////////////////////////////////////////
+        // Create JSON payload
+        const payload = {
+            email: email,
+            password: password,
+        };
 
         // Axios request
         setLoading(true);
         try {
-            const response = await axios.post(`${baseURL}/account/login/`, formData,{
+            const response = await axios.post(`${baseURL}/account/login/`, payload, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
- 
-            // const loginUser = (userData, accessToken, refreshToken)
+
             // Save user data and tokens using the context
             loginUser(response.data, response.data.access_token, response.data.refresh_token);
 
