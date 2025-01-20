@@ -11,9 +11,10 @@ urlpatterns = [
     # Authentication-proccess
     #path('register/', RegisterView.as_view(), name='register'),
     path('register/', views.UserProfileRegisterAPIView.as_view(), name='register'),
+    path('resend-otp/<str:email>/', views.ResendOTPToEmail, name='resend-otp'),
     path('verify-email/', views.VerifyUserEmail.as_view(), name='verify-email'),
-    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # login
-    path('login/', views.LoginUserView.as_view(), name='login-user'),
+    
+    path('login/', views.LoginUserView.as_view(), name='login-user'),# path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # login
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  #jwt views classTokenRefreshView
     path('logout/', views.LogoutApiView.as_view(), name='logout'),
     path('testing/', views.TestingAuthenticatedReq.as_view(), name='just-for-testing'),

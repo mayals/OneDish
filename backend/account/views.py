@@ -15,6 +15,12 @@ from .serializers import  (RegisteUserProfileSerializer, OneTimePasswordSerializ
                            UserSerializer, UpdateUserSerializer, UpdateClientProfileSerializer,UpdateAdminProfileSerializer,
                            PasswordResetRequestSerializer, SetNewPasswordSerializer, ChangePasswordSerializer)
 
+from django.contrib.sites.shortcuts import get_current_site
+import random
+from django.core.mail import EmailMessage
+from django.conf import settings
+
+
 
 
 
@@ -38,7 +44,8 @@ class UserProfileRegisterAPIView(views.APIView):
             serializer.save()
             user = serializer.data
             print('user=',user)
-             # send otp to email 
+            
+            # send otp to email 
             send_generated_otp_to_email(user.get('email'), request)
             return response.Response({
                 'user': user,
@@ -66,8 +73,8 @@ class VerifyUserEmail(views.APIView):
                 try:
                     user_pass_obj = get_object_or_404(OneTimePassword,otp=otp)
                     user=user_pass_obj.user
-                    if not user.is_verified_email:
-                        user.is_verified_email=True
+                    if not user.is_verifiedEmail:
+                        user.is_verifiedEmail=True
                         user.save()
                         return response.Response({'message':'account email verified successfully'}, status=status.HTTP_200_OK)                                                      
                     return response.Response({'message':'passcode is invalid user is already verified'}, status=status.HTTP_204_NO_CONTENT)
@@ -75,6 +82,42 @@ class VerifyUserEmail(views.APIView):
                     return response.Response({"error": "otp error - passcode is invalid ! please enter valid otp code"}, status=status.HTTP_404_NOT_FOUND)    
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
        
+
+
+
+ # send otp to email 
+
+from django.http import HttpResponse, JsonResponse
+
+def ResendOTPToEmail(request, email):
+    print('email=', email)
+    user = UserModel.objects.filter(email=email)
+    print("user=", user)
+    if user.exists():
+        user = user.first()  # Get the user object
+        subject = "One time passcode for Email verification"
+        otp = random.randint(1000, 9999)
+        current_site = get_current_site(request).domain
+        email_body = f"Hi {user.first_name} thanks for signing up on {current_site}, please verify your email with the one time passcode:\n \n {otp}"
+        from_email = settings.EMAIL_HOST
+
+        # Check if an OTP record already exists for the user
+        otp_obj, created = OneTimePassword.objects.get_or_create(user=user)
+        otp_obj.otp = otp  # Update the OTP value
+        otp_obj.save()  # Save the updated OTP record
+
+        # Send the email
+        d_email = EmailMessage(subject=subject, body=email_body, from_email=from_email, to=[user.email])
+        d_email.send()
+
+        return JsonResponse({
+            'user': user.email,
+            'register_message': 'Thanks for signing up. A passcode has been sent to verify your email.'
+        }, status=201)
+    else:
+        return JsonResponse({'error': 'User not found'}, status=404)
+
+
 
 
 
