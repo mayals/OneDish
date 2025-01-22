@@ -276,19 +276,17 @@ class DeleteUserAPIView(views.APIView):
 #path('request-user/', views.RequestUserDetailAPIView.as_view(), name='request-user'),
 #   get request user data FOR Navbar in react 
 class DetailRequestUserAPIView(views.APIView):
-    permission_classes=[permissions.IsAuthenticated]
-    serializer_class=UserSerializer
-    queryset = UserModel.objects.all()
-    # lookup_field = "id"
-    def get(self,request,*args,**kwargs):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get(self, request, *args, **kwargs):
         try:
             user = get_object_or_404(UserModel, id=request.user.id)
         except UserModel.DoesNotExist:
-           return response.Response(status_code=404)    
-       
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+        
         serializer = self.serializer_class(user, many=False)
         return response.Response(serializer.data, status=status.HTTP_200_OK)
-
 
   
     

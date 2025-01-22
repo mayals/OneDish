@@ -284,7 +284,7 @@ class UserSerializer(serializers.ModelSerializer):
         if obj.is_client:
             try:  
                 # print(f"Fetching client profile for user: {obj.id}")
-                return ClientProfileSerializer(obj.clientprofile).data 
+                return ClientProfileSerializer(obj.client_profile).data 
             except(ClientProfile.DoesNotExist):
                 print(f"Profile does not exist for user")
                 return None
@@ -293,7 +293,7 @@ class UserSerializer(serializers.ModelSerializer):
         if obj.is_superuser:
             try:
                 # print(f"Fetching employee profile for user: {obj.id}")
-                return AdminProfileSerializer(obj.adminprofile).data
+                return AdminProfileSerializer(obj.admin_profile).data
             except(AdminProfile.DoesNotExist):
                 print(f"Profile does not exist for user: {obj.id}")
                 return None
