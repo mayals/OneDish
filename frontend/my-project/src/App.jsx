@@ -1,8 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
+
+
+import {TokenProvider} from './pages/account_pages/TokenProvider';
+import {UserProvider} from './pages/account_pages/UserProvider';
 import { MainMealProvider } from  './pages/home_page_comp/MainMealProvider';
 import { SideMealsProvider } from  './pages/home_page_comp/SideMealsProvider';
-import { AccountProvider} from './pages/account_pages/AccountProvider'
+
+
 
 // visitors
 import HomePage from       "./pages/home_page_comp/HomePage";
@@ -62,7 +67,8 @@ const App = () =>{
             <BrowserRouter basename='/OneDish/'>
                 
                 {/* providers */}
-                <AccountProvider>
+                <TokenProvider>
+                <UserProvider>
                 <MainMealProvider>
                 <SideMealsProvider>
                     
@@ -118,7 +124,9 @@ const App = () =>{
 
                 </SideMealsProvider>    
                 </MainMealProvider>
-                </AccountProvider>
+                </UserProvider>
+                </TokenProvider>
+                
             
             </BrowserRouter> 
     

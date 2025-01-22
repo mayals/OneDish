@@ -1,22 +1,27 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { AccountContext } from "./AccountContext";
+
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../Loading";
 import { baseURL } from "../../api/Api.js"
 
-
+import { TokenContext } from "../account_pages/TokenContext";
 
 
 const Login = () => {
     const navigate = useNavigate();
-    const { loginUser } = useContext(AccountContext); // Use the loginUser function from context
+
 
     // State
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    // Get tokens
+    const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
+
+
 
     // Handle form field changes
     const onChangeEmail = (event) => {
@@ -52,6 +57,10 @@ const Login = () => {
         console.log('formData.password=', formData.get('password'));
         ///////////////////////////////////////////////////////////////////
 
+
+
+
+
         // Axios request
         setLoading(true);
         try {
@@ -61,9 +70,15 @@ const Login = () => {
                 },
             });
  
-            // const loginUser = (userData, accessToken, refreshToken)
-            // Save user data and tokens using the context
-            loginUser(response.data, response.data.access_token, response.data.refresh_token);
+            localStorage.setItem('refreshToken',response.data.access_token);
+            localStorage.setItem('accessToken',response.data.refresh_token);
+            console.log('refreshToken=',response.data.access_token)
+            console.log('accessToken=',response.data.refresh_token)
+            
+            setAccessToken(response.data.access_token)
+            setRefreshToken (response.data.refresh_token)
+        
+
 
             setLoading(false);
             toast("Login successful!", { type: "success" });
@@ -72,6 +87,12 @@ const Login = () => {
             setLoading(false);
             toast(error.response?.data?.message || "Login failed!", { type: "error" });
         }
+
+
+
+
+
+
     };
 
     return (

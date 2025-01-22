@@ -1,30 +1,80 @@
 import React, { useEffect, useState, useContext } from 'react';
 // https://www.npmjs.com/package/react-anchor-link-smooth-scroll
 import AnchorLink from "react-anchor-link-smooth-scroll";
+// assets
 import logo from "../../assets/oneDishLogo.jpg";
 import menuButton from "../../assets/menu-symbol-of-three-parallel-lines-svgrepo-com.svg";
 import closeButton from "../../assets/close-bold-svgrepo-com.svg";
-// context 
-import { AccountContext } from "../account_pages/AccountContext";
 import userIcon from  "../../assets/user-svgrepo-com.svg"
+// context 
+import { UserContext } from '../account_pages/UserContext';
+import { TokenContext }       from '../account_pages/TokenContext';
+import {AxiosInstance} from '../../api/AxiosInstance.js';
+
+
+
+
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import Loading from "../../Loading.jsx"
+import { baseURL } from "../../api/Api.js"
+
 
 
 const Navbar = () => {
+    const [loading, setLoading] = useState(false);
 
-    const { user, accessToken, logoutUser } = useContext(AccountContext);
+    // Get tokens
+    const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
 
+    // Get user
+    const { user, setUser } = useContext(UserContext);
 
-
-
-    const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
-
+    // Set tokens from localStorage on initial render
     useEffect(() => {
-        setIsMobileMenuVisible(false);
-    }, []);
+        setAccessToken(localStorage.getItem('accessToken'));
+        setRefreshToken(localStorage.getItem('refreshToken'));
+    }, [ ]);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuVisible((prev) => !prev);
-    };
+    // Fetch user data when accessToken changes
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (accessToken){
+                console.log('if accessToken=',accessToken)
+                
+                setLoading(true);
+                try {
+                    const response = await AxiosInstance.get('/account/request-user/');
+                    setUser(response.data);
+                    console.log('from axios USER=', user);
+                    setLoading(false);
+                    toast("Login successful!", { type: "success" });
+            
+                } catch (error) {
+                    setLoading(false);
+                    toast(error.response?.data?.message || "Login failed!", { type: "error" });
+                }
+                   
+            }
+        };
+
+        fetchUserData();
+    }, [accessToken, setUser]);
+
+
+
+        //  toggleMobileMenu
+        const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
+
+        useEffect(() => {
+            setIsMobileMenuVisible(false);
+        }, []);
+
+        const toggleMobileMenu = () => {
+            setIsMobileMenuVisible((prev) => !prev);
+        };
 
 
 
@@ -40,10 +90,17 @@ const Navbar = () => {
         // if ( !refreshToken || !user.role || !profileLinks[user.role]) return null;
 
 
-
+ 
 
     return (
         <section  className="fixed mt-0 w-full mx-0 mt-5 md:mt-10 transition-all duration-500 drop-shadow-lg md:fixed md:flex md:w-full md-mx-0 md:z-40 z-40">
+           
+           {loading && <Loading />}
+
+            {/* Add the ToastContainer here */}
+            <ToastContainer />
+
+
             <nav className="pt-7 pb-3 bg-white md:w-full">
                 {/* Mobile Navbar */}
                 <div className="flex justify-between items-center px-4 md:hidden">
