@@ -41,25 +41,23 @@ const Navbar = () => {
     // Fetch user data when accessToken changes
     useEffect(() => {
         const fetchUserData = async () => {
-            if (accessToken){
-                console.log('if accessToken=',accessToken)
-                
+            if (accessToken) {
+                console.log('Access Token exists:', accessToken);
                 setLoading(true);
+    
                 try {
                     const response = await AxiosInstance.get('/account/request-user/');
                     setUser(response.data);
-                    console.log('from axios USER=', user);
+                    console.log('User data from API:', response.data);
                     setLoading(false);
                     toast("Login successful!", { type: "success" });
-            
                 } catch (error) {
                     setLoading(false);
                     toast(error.response?.data?.message || "Login failed!", { type: "error" });
                 }
-                   
             }
         };
-
+    
         fetchUserData();
     }, [accessToken, setUser]);
 

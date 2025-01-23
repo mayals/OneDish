@@ -70,10 +70,10 @@ const Login = () => {
                 },
             });
  
-            localStorage.setItem('refreshToken',response.data.access_token);
-            localStorage.setItem('accessToken',response.data.refresh_token);
-            console.log('refreshToken=',response.data.access_token)
-            console.log('accessToken=',response.data.refresh_token)
+            localStorage.setItem('accessToken',response.data.access_token);
+            localStorage.setItem('refreshToken',response.data.refresh_token);
+            console.log('accessToken=',response.data.access_token)
+            console.log('refreshToken=',response.data.refresh_token)
             
             setAccessToken(response.data.access_token)
             setRefreshToken (response.data.refresh_token)

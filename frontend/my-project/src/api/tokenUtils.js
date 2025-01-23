@@ -24,7 +24,7 @@ export const isTokenExpired = (accessToken) => {
 //  get new access token from refresh  token link 
 export const refreshAccessToken = async (refreshToken) => {
   try {
-    const response = await axios.post(`${baseURL}/api/v1/auth/token/refresh/`, { refresh: refreshToken,  });
+    const response = await axios.post(`${baseURL}/account/token/refresh/`, { refresh: refreshToken,  });
      
     console.log('new access_token from refresh_token link =',response.data.access)
     return response.data.access;
