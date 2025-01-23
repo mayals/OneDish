@@ -275,17 +275,21 @@ class DeleteUserAPIView(views.APIView):
 # #################################### by request user only ########################################
 #path('request-user/', views.RequestUserDetailAPIView.as_view(), name='request-user'),
 #   get request user data FOR Navbar in react 
+
 class DetailRequestUserAPIView(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]  # Ensure this line is uncommented
     serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
         try:
             user = get_object_or_404(UserModel, id=request.user.id)
+            print('request.user=', request.user)
+        
         except UserModel.DoesNotExist:
+            print('request.user=', "not found request user")
             return response.Response(status=status.HTTP_404_NOT_FOUND)
         
-        serializer = self.serializer_class(user, many=False)
+        serializer = self.serializer_class(user)
         return response.Response(serializer.data, status=status.HTTP_200_OK)
 
   
