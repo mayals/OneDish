@@ -11,6 +11,11 @@ import { TokenContext } from "../account_pages/TokenContext";
 
 const Login = () => {
     const navigate = useNavigate();
+    
+    //context 
+    const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
+    
+
 
 
     // State
@@ -18,9 +23,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    // Get tokens
-    const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
-
+   
 
 
     // Handle form field changes
@@ -31,6 +34,10 @@ const Login = () => {
     const onChangePassword = (event) => {
         setPassword(event.target.value);
     };
+
+
+
+
 
     // Handle form submission
     const handleSubmit = async (e) => {
@@ -46,7 +53,6 @@ const Login = () => {
             return;
         }
 
-         
         // Create FormData object
         const formData = new FormData();
         formData.append("email", email);
@@ -56,9 +62,6 @@ const Login = () => {
         console.log('formData.email=', formData.get('email'));
         console.log('formData.password=', formData.get('password'));
         ///////////////////////////////////////////////////////////////////
-
-
-
 
 
         // Axios request
@@ -74,22 +77,22 @@ const Login = () => {
             localStorage.setItem('refreshToken',response.data.refresh_token);
             console.log('accessToken=',response.data.access_token)
             console.log('refreshToken=',response.data.refresh_token)
-            
+
+
+            // set context -- update TokenContext
             setAccessToken(response.data.access_token)
-            setRefreshToken (response.data.refresh_token)
-        
-
-
+            setRefreshToken(response.data.refresh_token)
+            
+            
             setLoading(false);
             toast("Login successful!", { type: "success" });
             navigate("/"); // Redirect to home page after successful login
+       
+       
         } catch (error) {
             setLoading(false);
             toast(error.response?.data?.message || "Login failed!", { type: "error" });
         }
-
-
-
 
 
 

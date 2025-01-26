@@ -4,29 +4,46 @@ import {jwtDecode} from 'jwt-decode';
 import dayjs from 'dayjs';
 
 
+
+
 console.log('AxiosInstance.js loaded');
 
 const baseURL = "http://127.0.0.1:8000/";
 
+let accessToken  = localStorage.getItem('accessToken')
+console.log('from local accessToken',accessToken)
+let refreshToken = localStorage.getItem('refreshToken')
+console.log('from local refreshToken',refreshToken)
 
-//  no image post
+
+//  default backend endpoint without Authorization (visitor) no accessToken(allow any)
+//  'Content-Type': 'application/json', no image post
 export const AxiosDefault = axios.create({
-    baseURL: baseURL,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json', //  no image post
-    },
-});
+                                  baseURL: baseURL,
+                                  headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json',
+                                            // no image post
+                                            // 'Content-Type' : 'multipart/form-data',
+                                            //  no need authenticated 
+                                            // 'Authorization': `Bearer ${accessToken}`, // Correct template literal
+                                          },
+                                  }
+                                );
 
-// for image post
+
+//  for Authorization - permission is authenticated backend endpoint (only authenticated)
+// 'Content-Type' : 'multipart/form-data',  -- with image 
 export const AxiosInstance = axios.create({
-    baseURL: baseURL,
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'multipart/form-data', // for image post
-    },
-});
-
+                                  baseURL: baseURL,
+                                  headers: {
+                                            'Accept': 'application/json',
+                                            // 'Content-Type': 'application/json',
+                                            'Content-Type' : 'multipart/form-data',
+                                            'Authorization': `Bearer ${accessToken}`, // Correct template literal
+                                          },
+                                  }
+);
 
 
 
@@ -54,21 +71,14 @@ AxiosInstance.interceptors.request.use(
                 console.log('Token in localstorage is EXPIRE');
                 try {
                     const refreshToken = localStorage.getItem('refreshToken');
-                    console.log('old refreshToken in localstorage', refreshToken);
+                    console.log('refreshToken in localstorage', refreshToken);
                     
                     const response = await axios.post(`${baseURL}/account/token/refresh/`, { refresh: refreshToken });
-                    
-                    // update -- accessToken --refreshToken in localStorage
                     localStorage.setItem('accessToken', response.data.access);
                     console.log('NEW accessToken after interceptors', response.data.access);
-                    localStorage.setItem('refreshToken', response.data.refresh);
-                    console.log('NEW refreshToken after interceptors', response.data.refresh);
-
-                    // update      -- config.headers['Authorization']
+                    
                     config.headers['Authorization'] = `Bearer ${response.data.access}`;
                     return config;
-
-
                 } catch (error) {
                     console.log('Failed to refresh token:', error);
                     localStorage.clear();

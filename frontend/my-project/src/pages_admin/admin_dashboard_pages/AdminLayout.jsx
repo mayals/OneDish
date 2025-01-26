@@ -7,6 +7,7 @@ import AdminSidebar from './AdminSidebar.jsx';
 const AdminLayout = () => {
     return (
         <section>
+        <h1>AdminLayout</h1>
             <div className="flex h-full">
             
                 <AdminSidebar />

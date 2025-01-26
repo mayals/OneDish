@@ -1,7 +1,10 @@
 
 import { BrowserRouter, Routes, Route, NavLink ,Link, useNavigate} from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-import {useState, useEffect}  from  'react';
+import React, { useEffect, useState, useContext } from 'react';
+// context 
+import { UserContext } from "../../../src/pages/account_pages/UserContext";
+import { TokenContext }       from '../../../src/pages/account_pages/TokenContext';
+
 
 // import projectsIcon from '../../assets/star-sun-black-shape-svgrepo-com.svg';
 // import paymentIcon from '../../assets/money-svgrepo-com.svg';
@@ -18,18 +21,30 @@ const AdminSidebar = () => {
     
   
     // check the user is authenticated user 
-    const accessToken = localStorage.getItem('accessToken');
-    console.log('accessToken=',accessToken)
+    // const accessToken = localStorage.getItem('accessToken');
+    // console.log('accessToken=',accessToken)
+    
+    
+    // Get tokens
+    const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
+    // Get user
+    const { user, setUser } = useContext(UserContext);
+    
+
+
     if(!accessToken){
         // accessToken = null
         navigate('/login')
     }
-    
-    const profilePicture = useSelector((state) => state.authSlRed.profilePicture);
-    console.log('profilePicture from redux=',profilePicture)
 
+    // const profilePicture = useSelector((state) => state.authSlRed.profilePicture);
+    //     console.log('profilePicture from redux=',profilePicture)
+    console.log('from TokenContext accessToken=',accessToken)   
+    console.log('from UserContext user=',user) 
     
-    
+
+
+
     return (
         <section className="bg-[#7532e5] text-white px-4 justify-center">
 
@@ -37,7 +52,7 @@ const AdminSidebar = () => {
             
             
             
-            <div className="flex justify-center items-center gap-1 mt-5">
+            {/* <div className="flex justify-center items-center gap-1 mt-5">
                
                     { profilePicture ? (
                                             <img
@@ -55,7 +70,7 @@ const AdminSidebar = () => {
                     }
                
                 
-            </div>
+            </div> */}
 
             <h3 className='text-center text-2xl py-3 my-2 font-bold shadow-black-500/50'>
                 Administration
@@ -67,7 +82,7 @@ const AdminSidebar = () => {
                 <h2 id="a1 text-black">
                     <Link  to="/admin-layout/dashboard-page" type="button"className="flex items-center justify-between w-full p-1 font-medium rtl:text-right text-gray-900 border border-purple-800 focus:ring-1 focus:ring-gray-800 hover:bg-[#019bff]" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
                         <div className='text-[#dde3ed] font-myRobotofont flex items-center'>
-                           <img className='mx-2 lineColor-[#dde3ed]' src={dashboardIcon} width='20px' height='20px' alt="users" /><span className='text-black text-xl'>Dasboard</span>
+                           <img className='mx-2 lineColor-[#dde3ed]'  width='20px' height='20px' alt="users" /><span className='text-black text-xl'>Dasboard</span>
                         </div>
                     </Link>
                 </h2>
@@ -75,7 +90,7 @@ const AdminSidebar = () => {
                 <h2 id="a1">
                     <button type="button" onClick={() => setToggle1(!toggle1)} className="flex items-center justify-between w-full p-1 font-medium rtl:text-right text-gray-900 border border-purple-800 focus:ring-1 focus:ring-gray-800 hover:bg-[#019bff]" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
                         <span className='text-[#dde3ed] font-myRobotofont flex items-center'>
-                           <img className='mx-2 lineColor-[#dde3ed]' src={usersIcon} width='20px' height='20px' alt="users" />Users
+                           <img className='mx-2 lineColor-[#dde3ed]'  width='20px' height='20px' alt="users" />Users
                         </span>
                         {toggle1 ? (
                             <svg className="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -105,7 +120,7 @@ const AdminSidebar = () => {
                 <h2 id="a2">
                     <button type="button" onClick={() => setToggle2(!toggle2)} className="flex items-center justify-between w-full p-1 font-medium rtl:text-right text-gray-900 border border-purple-800 focus:ring-1 focus:ring-gray-800 hover:bg-[#019bff]" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
                         <span className='text-[#dde3ed] font-myRobotofont flex items-center'>
-                           <img className='mx-2 lineColor-[#dde3ed]' src={projectsIcon} width='20px' height='20px' alt="projects" />Projects
+                           <img className='mx-2 lineColor-[#dde3ed]' width='20px' height='20px' alt="projects" />Projects
                         </span>
                         {toggle2 ? (
                             <svg className="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -144,7 +159,7 @@ const AdminSidebar = () => {
                 <h2 id="a3">
                     <button type="button" onClick={() => setToggle3(!toggle3)} className="flex items-center justify-between w-full p-1 font-medium rtl:text-right text-gray-900 border border-purple-800 focus:ring-1 focus:ring-gray-800 hover:bg-[#019bff]" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
                         <span className='text-[#dde3ed] font-myRobotofont flex items-center'>
-                           <img className='mx-2 lineColor-[#dde3ed]' src={paymentIcon} width='20px' height='20px' alt="payments" />Payments
+                           <img className='mx-2 lineColor-[#dde3ed]'  width='20px' height='20px' alt="payments" />Payments
                         </span>
                         {toggle3 ? (
                             <svg className="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

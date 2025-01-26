@@ -1,26 +1,26 @@
 import React, { useState, useEffect} from 'react';
 import { TokenContext } from './TokenContext';
+import { useNavigate } from "react-router-dom";
 
 
 export const TokenProvider = ({ children }) => {
-    
-    const [accessToken, setAccessToken] = useState(null);
-    const [refreshToken, setRefreshToken] = useState(null);
 
-    useEffect(() => {
-        const storedAccessToken = localStorage.getItem('accessToken');
-        const storedRefreshToken = localStorage.getItem('refreshToken');
+            const [accessToken, setAccessToken]   = useState(null);
+            const [refreshToken, setRefreshToken] = useState(null);
 
-        if (storedAccessToken && storedRefreshToken) {
-            setAccessToken(storedAccessToken);
-            setRefreshToken(storedRefreshToken);
-        }
-    }, []);
+            useEffect(() => {
+                const storedAccessToken  = localStorage.getItem('accessToken');
+                const storedRefreshToken = localStorage.getItem('refreshToken');
 
-    
-    return (
-        <TokenContext.Provider value={{ accessToken, refreshToken, setAccessToken, setRefreshToken }}>
-            {children}
-        </TokenContext.Provider>
-    );
+                if (storedAccessToken && storedRefreshToken) {
+                    setAccessToken(storedAccessToken);
+                    setRefreshToken(storedRefreshToken);
+                }
+            }, []);
+
+            return (
+                <TokenContext.Provider value={{ accessToken, refreshToken, setAccessToken, setRefreshToken }}>
+                    {children}
+                </TokenContext.Provider>
+            );
 };

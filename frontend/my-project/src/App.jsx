@@ -22,7 +22,10 @@ import ChangePassword from  "./pages/account_pages/ChangePassword";
 
 // admin
 import AdminLayout from './pages_admin/admin_dashboard_pages/AdminLayout.jsx';
-import AdminDashboard from './pages_admin/admin_dashboard_pages/AdminLayout.jsx'; 
+// import AdminDashboard from './pages_admin/admin_dashboard_pages/AdminDashboard.jsx'; 
+
+// client
+import ClientDashboard from './pages_client/client_dashboard_pages/ClientDashboard.jsx'; 
 
 // tag  pages
 import AdminTagCreate from './pages_admin/admin_crud_pages/tag_crud/AdminTagCreate.jsx'
@@ -55,82 +58,70 @@ import AdminUserUpdate from   './pages_admin/admin_crud_pages/user_crud/AdminUse
 
 
 
-
-
-
-
-
-const App = () =>{
-
-        return (
-        
-            <BrowserRouter basename='/OneDish/'>
-                
-                {/* providers */}
-                <TokenProvider>
+const App = () => {
+    return (
+        <BrowserRouter basename='/OneDish/'>
+            {/* Providers */}
+            <TokenProvider>
                 <UserProvider>
-                <MainMealProvider>
-                <SideMealsProvider>
-                    
-                    
-                    <Routes>
-                        {/* ###################  Visitor  ################# */}
-                        {/* for all  visitors- allow any - No authentication */}
-                        <Route path="/"                element={<HomePage />} />
-                        <Route path="/register"        element={<Register />} />
-                        <Route path="/verify-email"    element={<VerifyeEmail />} />
-                        <Route path="/login"           element={<Login />} />
-                        <Route path="/unauthorized"    element={<Unauthorized />} />
-                        <Route path="*"                element={<h1>Page Not Found</h1>} />
-                        {/*   Forget Password */}
-                        <Route path="/forget-password" element={<ForgetPassword />} />
-                        <Route path="/set-new-password" element={<SetNewPassword />} />
-                        <Route path="/change-password" element={<ChangePassword/>} />
-                        
+                    <MainMealProvider>
+                        <SideMealsProvider>
+                            <Routes>
+                                {/* ###################  Visitor  ################# */}
+                                {/* for all visitors - allow any - No authentication */}
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/verify-email" element={<VerifyeEmail />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/unauthorized" element={<Unauthorized />} />
+                                <Route path="*" element={<h1>Page Not Found</h1>} />
 
-                        {/* ###################  Admin  ################# */}
-                        {/*  only for admin - Need authentication */}
-                        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>    
-                            <Route path="/admin-layout"    element={<AdminLayout />}>
-                                {/* dashboard */}
-                                {/* <Route path="dashboard-page" element={<AdminDashboard />} /> */}
-                                {/* --user service -- */}
-                                {/* user  */}
-                                <Route path="user-list"            element={<AdminUserList />} />
-                                <Route path="user-detail/:id"      element={<AdminUserDetail />} />
-                                <Route path="user-update/:id"      element={<AdminUserUpdate />} /> 
-                                
-                                {/* --meal service -- */}
-                                {/* tag */}
-                                <Route path="tag-create"        element={<AdminTagCreate />} />
-                                <Route path="tag-list"          element={<AdminTagList />} />
-                                <Route path="tag-detail/:id"    element={<AdminTagDetail />} />
-                                <Route path="tag-update/:id"    element={<AdminTagUpdate />} />
-                                {/*  main-meal */}
-                                <Route path="main-meal-create"         element={<AdminMainMealCreate />} />
-                                <Route path="main-meal-list"           element={<AdminMainMealList />} />
-                                <Route path="main-meal-detail/:id"     element={<AdminMainMealDetail />} /> 
-                                <Route path="main-meal-update/:id"     element={<AdminMainMealUpdate />} />
-                                {/*  side-meal*/}
-                                <Route path="side-meal-create"         element={<AdminSideMealCreate />} />
-                                <Route path="side-meal-list"           element={<AdminSideMealList />} />
-                                <Route path="side-meal-detail/:id"     element={<AdminSideMealDetail />} /> 
-                                <Route path="side-meal-update/:id"     element={<AdminSideMealUpdate />} />
-                            </Route> 
-                        </Route>
+                                {/* ###################  authenticated user  ################# */}
+                                {/* ###################        for any auth user      ################# */}
+                                {/* Forget Password */}
+                                <Route path="/forget-password" element={<ForgetPassword />} />
+                                <Route path="/set-new-password" element={<SetNewPassword />} />
+                                <Route path="/change-password" element={<ChangePassword />} />
+                                {/* client */}
+                                <Route path="/client-dashboard" element={<ClientDashboard />} />
 
-                    </Routes>
+                                {/* ################### for Admin only  ################# */}
+                                {/* only for admin - Need authentication */}
+                                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                                    <Route path="/admin-layout" element={<AdminLayout />}>
+                                        {/* admin dashboard */}
+                                        {/* <Route path="dashboard-page" element={<AdminDashboard />} /> */}
+                                        {/* --user service -- */}
+                                        {/* user */}
+                                        <Route path="user-list" element={<AdminUserList />} />
+                                        <Route path="user-detail/:id" element={<AdminUserDetail />} />
+                                        <Route path="user-update/:id" element={<AdminUserUpdate />} />
 
-
-                </SideMealsProvider>    
-                </MainMealProvider>
+                                        {/* --meal service -- */}
+                                        {/* tag */}
+                                        <Route path="tag-create" element={<AdminTagCreate />} />
+                                        <Route path="tag-list" element={<AdminTagList />} />
+                                        <Route path="tag-detail/:id" element={<AdminTagDetail />} />
+                                        <Route path="tag-update/:id" element={<AdminTagUpdate />} />
+                                        {/* main-meal */}
+                                        <Route path="main-meal-create" element={<AdminMainMealCreate />} />
+                                        <Route path="main-meal-list" element={<AdminMainMealList />} />
+                                        <Route path="main-meal-detail/:id" element={<AdminMainMealDetail />} />
+                                        <Route path="main-meal-update/:id" element={<AdminMainMealUpdate />} />
+                                        {/* side-meal */}
+                                        <Route path="side-meal-create" element={<AdminSideMealCreate />} />
+                                        <Route path="side-meal-list" element={<AdminSideMealList />} />
+                                        <Route path="side-meal-detail/:id" element={<AdminSideMealDetail />} />
+                                        <Route path="side-meal-update/:id" element={<AdminSideMealUpdate />} />
+                                    </Route>
+                                </Route>
+                            </Routes>
+                        </SideMealsProvider>
+                    </MainMealProvider>
                 </UserProvider>
-                </TokenProvider>
-                
-            
-            </BrowserRouter> 
-    
-        )
-}
+            </TokenProvider>
+        </BrowserRouter>
+    );
+};
 
 export default App;

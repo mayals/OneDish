@@ -9,7 +9,7 @@ import userIcon from  "../../assets/user-svgrepo-com.svg"
 // context 
 import { UserContext } from '../account_pages/UserContext';
 import { TokenContext }       from '../account_pages/TokenContext';
-
+import {AxiosInstance} from '../../api/AxiosInstance.js';
 
 import { ToastContainer, toast } from "react-toastify";
 import Loading from "../../Loading.jsx"
@@ -24,25 +24,66 @@ const Navbar = () => {
     const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
 
     // Get user
-    const { user, role, setUser, setRole} = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
-    console.log('from context user=',user);
-    console.log('from context role=',role);
-    console.log('from context accessToken=', accessToken);
 
+    // // Set tokens from localStorage on initial render
+    // useEffect(() => {
+    //     setAccessToken(localStorage.getItem('accessToken'));
+    //     setRefreshToken(localStorage.getItem('refreshToken'));
+    // }, [ ]);
+
+    // // Fetch user data when accessToken changes
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //         if (accessToken) {
+    //             console.log('Access Token exists:', accessToken);
+    //             setLoading(true);
     
+    //             //  response.data
+    //             try {
+    //                 const response = await AxiosInstance.get('/account/request-user/');
+    //                 setUser(response.data);
+    //                 console.log('User data from API:', response.data);
+    //                 setLoading(false);
+    //                 toast("Login successful!", { type: "success" });
+                
+                   
+
+
+    //             // response.error 
+    //             } catch (error) {
+    //                 setLoading(false);
+    //                 toast(error.response?.data?.message || "Login failed!", { type: "error" });
+    //             }
+    //         }
+    //         const profileLinks = null
+    //     };
     
-    
+    //     fetchUserData();
+    // }, [accessToken, setUser]);
+
+
     // function to render  dynamuic links ProfileLinks 
     const profileLinks = {
         Admin    :    "/admin-layout",
         Client   :    "/client-dashboard",
     };
-    console.log('profileLinks[user.role]=', profileLinks[user.role]); 
-    console.log('profileLinks[role]',profileLinks[role]);
+    
+    const role = user.role
+     
+    useEffect(() => {
+            if (accessToken) {
+            console.log('role=',role);
+            console.log('accessToken=', accessToken);
+            console.log('user.role=', user?.role);
+            console.log('profileLinks[user.role]=', profileLinks[user.role]); 
+            console.log('profileLinks[role]',profileLinks[role]);
+        }
+    }, [accessToken, setUser]);
 
-  
 
+    
 
     //  toggleMobileMenu
     const [isMobileMenuVisible, setIsMobileMenuVisible] = useState(false);
@@ -59,10 +100,10 @@ const Navbar = () => {
     return (
         <section  className="fixed mt-0 w-full mx-0 mt-5 md:mt-10 transition-all duration-500 drop-shadow-lg md:fixed md:flex md:w-full md-mx-0 md:z-40 z-40">
            
-           {/* {loading && <Loading />} */}
+           {loading && <Loading />}
 
             {/* Add the ToastContainer here */}
-            {/* <ToastContainer /> */}
+            <ToastContainer />
 
 
             <nav className="pt-7 pb-3 bg-white md:w-full">
@@ -111,37 +152,11 @@ const Navbar = () => {
                                 </AnchorLink>
                             </li>
                         </ul>
-
-                        {/* Call-to-Action Button  -  Mobile Menu Links  */}
-                        {!accessToken ? (
-    <div className="ml-8 md:mt-2">
-        {/* No authenticated - no access token */}
-        <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-            الدخول                        
-        </a>
-    </div>
-) : (
-    <div className="flex items-center justify-center">
-        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-            {user.profile_picture ? (
-                <img
-                    className="rounded-full w-8 h-8 mr-2"
-                    src={`http://localhost:8000${user.profile_picture}`} 
-                    alt={user.first_name || 'Profile'}
-                />
-            ) : (
-                <img 
-                    src={userIcon} 
-                    className="w-5 h-5 mr-2"
-                    alt="unknown user avatar"
-                />    
-            )}
-            <div> 
-                {user.first_name}   
-            </div> 
-        </a>
-    </div>
-)}
+                        <div className="text-center mt-4">
+                            <a href="/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                            الدخول
+                            </a>
+                        </div>
                     </div>
                 )}
 

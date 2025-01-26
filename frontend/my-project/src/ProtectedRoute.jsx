@@ -1,34 +1,36 @@
+import React, { useEffect, useState, useContext } from 'react';
 // routes/ProtectedRoute.js
 import {  Outlet } from 'react-router-dom';
-import { useEffect} from 'react';
+// context 
+import { UserContext } from '../../my-project/src/pages/account_pages/UserContext.jsx';
+import { TokenContext }       from '../../my-project/src/pages/account_pages/TokenContext';
+// axios
+import {AxiosInstance} from '../../my-project/src/api/AxiosInstance.js';
+
+import { ToastContainer, toast } from "react-toastify";
+import Loading from "../src/Loading.jsx"
+
 
 
 const ProtectedRoute = ({ allowedRoles,children }) => {
+       const [loading, setLoading] = useState(false);
+
+        // Get tokens
+        const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
+
+        // Get user
+        const { user, role, setUser, setRole} = useContext(UserContext);
+
+        console.log('from context user=',user);
+        console.log('from context role=',role);
+        console.log('from context accessToken=', accessToken);
         
 
-      
-    
-
-
-        let accessToken = localStorage.getItem('accessToken') || null;
-       
-        useEffect(() => {
-             if (accessToken){
-                dispatch(fetchRequestUserAction());
-             }
-        }, [accessToken,dispatch]);
-    
-        const { role } = useSelector((state) => state.authSlRed);
-        // Get data from Redux
-         console.log('role=',role)
-
-        
+        // allowedRoles
         if (role){
-
+                console.log('from context role=',role)
                 if (!allowedRoles.includes([role])){
-                // console.log('allowedRoles=',allowedRoles)
-                // console.log('loginSl_data.role=',loginSl_data.role)
-                return children ? children : <Outlet />
+                                                    return children ? children : <Outlet />
                 }      
         }
 
