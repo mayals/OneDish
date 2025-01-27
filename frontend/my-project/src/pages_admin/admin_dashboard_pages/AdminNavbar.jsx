@@ -1,7 +1,5 @@
-import { NavLink} from 'react-router-dom';
-import { useNavigate} from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 // import logo from '../../../../assets/homepage/logo.png'
-
 
 
 
@@ -22,8 +20,8 @@ const AdminNavbar = () => {
    
    
     return (
-        <nav className="bg-gray-800 text-white p-2">
-           <ul className='flex justify-between items-center bg-red-400'> 
+        <nav className="bg-gray-200 text-white p-3">
+           <ul className='flex justify-between items-center'> 
                 <li>
                     <form className="flex items-center max-w-sm mx-auto">    
                         <div className="w-full">

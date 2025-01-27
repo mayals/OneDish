@@ -54,15 +54,13 @@ AxiosInstance.interceptors.request.use(
                 console.log('Token in localstorage is EXPIRE');
                 try {
                     const refreshToken = localStorage.getItem('refreshToken');
-                    console.log('old refreshToken in localstorage', refreshToken);
+                    console.log('refreshToken in localstorage', refreshToken);
                     
                     const response = await axios.post(`${baseURL}/account/token/refresh/`, { refresh: refreshToken });
-                    
+                    console.log('response interceptors', response);
                     // update -- accessToken --refreshToken in localStorage
                     localStorage.setItem('accessToken', response.data.access);
                     console.log('NEW accessToken after interceptors', response.data.access);
-                    localStorage.setItem('refreshToken', response.data.refresh);
-                    console.log('NEW refreshToken after interceptors', response.data.refresh);
 
                     // update      -- config.headers['Authorization']
                     config.headers['Authorization'] = `Bearer ${response.data.access}`;

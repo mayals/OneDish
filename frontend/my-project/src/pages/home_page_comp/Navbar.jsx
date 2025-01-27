@@ -114,34 +114,34 @@ const Navbar = () => {
 
                         {/* Call-to-Action Button  -  Mobile Menu Links  */}
                         {!accessToken ? (
-    <div className="ml-8 md:mt-2">
-        {/* No authenticated - no access token */}
-        <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-            الدخول                        
-        </a>
-    </div>
-) : (
-    <div className="flex items-center justify-center">
-        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-            {user.profile_picture ? (
-                <img
-                    className="rounded-full w-8 h-8 mr-2"
-                    src={`http://localhost:8000${user.profile_picture}`} 
-                    alt={user.first_name || 'Profile'}
-                />
-            ) : (
-                <img 
-                    src={userIcon} 
-                    className="w-5 h-5 mr-2"
-                    alt="unknown user avatar"
-                />    
-            )}
-            <div> 
-                {user.first_name}   
-            </div> 
-        </a>
-    </div>
-)}
+                <div className="ml-8 md:mt-2">
+                    {/* No authenticated - no access token */}
+                    <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                        الدخول                        
+                    </a>
+                </div>
+                ) : (
+                    <div className="flex items-center justify-center">
+                        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                            {user.profile_picture ? (
+                                <img
+                                    className="rounded-full w-8 h-8 mr-2"
+                                    src={`http://localhost:8000${user.profile_picture}`} 
+                                    alt={user.first_name || 'Profile'}
+                                />
+                            ) : (
+                                <img 
+                                    src={userIcon} 
+                                    className="w-5 h-5 mr-2"
+                                    alt="unknown user avatar"
+                                />    
+                            )}
+                            <div> 
+                                {user.first_name}   
+                            </div> 
+                        </a>
+                    </div>
+                )}
                     </div>
                 )}
 
