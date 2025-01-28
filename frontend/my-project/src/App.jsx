@@ -1,14 +1,19 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
-
-
 import {TokenProvider} from './pages/account_pages/TokenProvider';
 import {UserProvider} from './pages/account_pages/UserProvider';
 import { MainMealProvider } from  './pages/home_page_comp/MainMealProvider';
 import { SideMealsProvider } from  './pages/home_page_comp/SideMealsProvider';
-
-
-
+//  Users CRUD 
+import AdminUsersListPage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUsersListPage.jsx'
+import AdminUserDetailPage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserDetailPage.jsx'
+import AdminUserUpdatePage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserUpdatePage.jsx'
+// import AdminUserDeletePage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserDeletePage.jsx'
+// admin
+import AdminLayout from '../src/pages_admin/admination_pages/AdminLayout.jsx';
+import AdminDashboard from '../src/pages_admin/admination_pages/AdminDashboard.jsx'; 
+// client
+// import ClientDashboard from './pages_client/client_dashboard_pages/ClientDashboard.jsx'; 
 // visitors
 import HomePage from       "./pages/home_page_comp/HomePage";
 import Login from           "./pages/account_pages/Login";
@@ -19,28 +24,16 @@ import Unauthorized from    "./pages/account_pages/Unauthorized";
 import ForgetPassword from  "./pages/account_pages/ForgetPassword";
 import SetNewPassword from  "./pages/account_pages/SetNewPassword";
 import ChangePassword from  "./pages/account_pages/ChangePassword";
-
-// admin
-import AdminLayout from './pages_admin/admin_dashboard_pages/AdminLayout.jsx';
-// import AdminDashboard from './pages_admin/admin_dashboard_pages/AdminDashboard.jsx'; 
-
-// client
-import ClientDashboard from './pages_client/client_dashboard_pages/ClientDashboard.jsx'; 
-
 // tag  pages
 import AdminTagCreate from './pages_admin/admin_crud_pages/tag_crud/AdminTagCreate.jsx'
 import AdminTagList   from './pages_admin/admin_crud_pages/tag_crud/AdminTagList.jsx'
 import AdminTagDetail from './pages_admin/admin_crud_pages/tag_crud/AdminTagDetail.jsx'
 import AdminTagUpdate from './pages_admin/admin_crud_pages/tag_crud/AdminTagUpdate.jsx'
-
-
 // main meal pages
 import AdminMainMealCreate from './pages_admin/admin_crud_pages/main_meal_crud/AdminMainMealCreate.jsx'
 import AdminMainMealList   from './pages_admin/admin_crud_pages/main_meal_crud/AdminMainMealList.jsx'
 import AdminMainMealDetail from './pages_admin/admin_crud_pages/main_meal_crud/AdminMainMealDetail.jsx'
 import AdminMainMealUpdate from './pages_admin/admin_crud_pages/main_meal_crud/AdminMainMealUpdate.jsx'
-
-
 // side meal pages
 import AdminSideMealCreate from './pages_admin/admin_crud_pages/sidemeal_crud/AdminSideMealCreate.jsx'
 import AdminSideMealList   from './pages_admin/admin_crud_pages/sidemeal_crud/AdminSideMealList.jsx'
@@ -49,10 +42,6 @@ import AdminSideMealUpdate from './pages_admin/admin_crud_pages/sidemeal_crud/Ad
 
 
 
-// user pages
-import AdminUserList   from   './pages_admin/admin_crud_pages/user_crud/AdminUserList.jsx'
-import AdminUserDetail from   './pages_admin/admin_crud_pages/user_crud/AdminUserDetail.jsx'
-import AdminUserUpdate from   './pages_admin/admin_crud_pages/user_crud/AdminUserUpdate.jsx'
 
 
 
@@ -83,20 +72,28 @@ const App = () => {
                                 <Route path="/set-new-password" element={<SetNewPassword />} />
                                 <Route path="/change-password" element={<ChangePassword />} />
                                 {/* client */}
-                                <Route path="/client-dashboard" element={<ClientDashboard />} />
+                                {/* <Route path="/client-dashboard" element={<ClientDashboard />} /> */}
 
                                 {/* ################### for Admin only  ################# */}
                                 {/* only for admin - Need authentication */}
                                 <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                                     <Route path="/admin-layout" element={<AdminLayout />}>
-                                        {/* admin dashboard */}
-                                        {/* <Route path="dashboard-page" element={<AdminDashboard />} /> */}
-                                        {/* --user service -- */}
-                                        {/* user */}
-                                        <Route path="user-list" element={<AdminUserList />} />
-                                        <Route path="user-detail/:id" element={<AdminUserDetail />} />
-                                        <Route path="user-update/:id" element={<AdminUserUpdate />} />
-
+                                        {/* dashboard */}
+                                        <Route path="dashboard-page" element={<AdminDashboard />} />
+                                        
+                                        {/* --users service -- */}
+                                        {/*  users  */}
+                                        <Route path="user-list"          element={<AdminUsersListPage />} />
+                                        <Route path="user-detail/:id"    element={<AdminUserDetailPage />} />
+                                        <Route path="user-update/:id"    element={<AdminUserUpdatePage />} />
+                                        {/* <Route path="user-delete/:id"    element={<AdminUserDeletePage />} />   */}
+                                        
+                                        {/* clients  */}
+                                        {/* <Route path="client-list"            element={<AdminClientsListPage />} />
+                                        <Route path="client-detail/:id"      element={<AdminClientDetailPage />} />
+                                        <Route path="client-update/:id"      element={<AdminClientUpdatePage />} /> 
+                                        <Route path="client-delete/:id"    element={<AdminClientDeletePage />} /> 
+                                       */}
                                         {/* --meal service -- */}
                                         {/* tag */}
                                         <Route path="tag-create" element={<AdminTagCreate />} />
