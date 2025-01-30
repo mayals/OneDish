@@ -58,10 +58,11 @@ const AdminUserListPage = () => {
 
 
   return (
+
     <section className="px-4 sm:px-6 lg:px-8 py-8">
       {loading && <Loading />}
       <ToastContainer />
-
+      {user.profile.profile_picture}
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="min-w-full inline-block align-middle">
@@ -107,9 +108,11 @@ const AdminUserListPage = () => {
                   {filteredUsers.map(user => (
                     <tr key={user.id} className="hover:bg-[#bc9b79]/25 transition-colors">
                         <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-900 hidden md:table-cell">
-                            {user?.profile?.profile_picture ? (
-                              <img 
-                                src={user.profile.profile_picture} 
+                            {user?.profile?.profile_picture
+                            ? (
+                              <img
+                                src={`http://localhost:8000${user.profile.profile_picture}`}
+                                // src={user.profile.profile_picture}
                                 className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" 
                                 alt={user.full_name} 
                               />
