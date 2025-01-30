@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
-import Loading from "../../Loading";
+import Loading from "../../common/Loading.jsx";
 import { baseURL } from "../../api/Api.js"
 
 import { TokenContext } from "../account_pages/TokenContext";
@@ -83,7 +83,7 @@ const Login = () => {
             setAccessToken(response.data.access_token)
             setRefreshToken(response.data.refresh_token)
             
-            
+
             setLoading(false);
             toast("Login successful!", { type: "success" });
             navigate("/"); // Redirect to home page after successful login

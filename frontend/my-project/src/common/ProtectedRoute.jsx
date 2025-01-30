@@ -2,8 +2,8 @@ import { useContext } from 'react';
 // routes/ProtectedRoute.js
 import {  Outlet } from 'react-router-dom';
 // context 
-import { UserContext } from '../../my-project/src/pages/account_pages/UserContext.jsx';
-import { TokenContext }       from '../../my-project/src/pages/account_pages/TokenContext';
+import { UserContext } from '../pages/account_pages/UserContext';
+import { TokenContext } from '../pages/account_pages/TokenContext';
 
 
 

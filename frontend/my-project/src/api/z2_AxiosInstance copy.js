@@ -34,55 +34,49 @@ export const AxiosInstance = axios.create({
 AxiosInstance.interceptors.request.use(
     async (config) => {
         console.log('config', config);
-        let token = localStorage.getItem('accessToken');
-        console.log('accessToken FROM LOCALSTORAGE=', token);
+        let token = localStorage.getItem('accessToken');  // Get access_token directly from local storage
+        console.log('accessToken  FROM LOCALSTORAGE=', token);
         
         if (token) {
             const user = jwtDecode(token);
             console.log('user from jwtDecode=', user);
             
+            // Check if accessToken in local storage is expired
             const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
             
             if (!isExpired) {
+                // Token is not expired
                 console.log('Token in localstorage is NOT EXPIRE');
                 config.headers['Authorization'] = `Bearer ${token}`;
                 return config;
             } else {
+                // Token is expired, try to refresh it
                 console.log('Token in localstorage is EXPIRE');
-                const refreshToken = localStorage.getItem('refreshToken');
-                
-                // Check if refresh token exists
-                if (!refreshToken) {
-                    console.log('No refresh token available');
-                    localStorage.clear();
-                    // Optionally redirect to login page here
-                    return Promise.reject(new Error('Authentication expired - please login again'));
-                }
-
                 try {
-                    console.log('Attempting token refresh...');
-                    const response = await axios.post(`${baseURL}/account/token/refresh/`, { 
-                        refresh: refreshToken 
-                    });
+                    const refreshToken = localStorage.getItem('refreshToken');
+                    console.log('refreshToken in localstorage', refreshToken);
                     
+                    const response = await axios.post(`${baseURL}/account/token/refresh/`, { refresh: refreshToken });
+                    console.log('response interceptors', response);
+                    // update -- accessToken --refreshToken in localStorage
                     localStorage.setItem('accessToken', response.data.access);
-                    console.log('NEW accessToken after refresh', response.data.access);
+                    console.log('NEW accessToken after interceptors', response.data.access);
 
+                    // update      -- config.headers['Authorization']
                     config.headers['Authorization'] = `Bearer ${response.data.access}`;
                     return config;
+
+
                 } catch (error) {
                     console.log('Failed to refresh token:', error);
                     localStorage.clear();
-                    // Optionally redirect to login page here
                     return Promise.reject(error);
                 }
             }
         }
         
+        // If no token is found in local storage
         console.log('No token found in local storage');
         return config;
-    },
-    (error) => {
-        return Promise.reject(error);
     }
 );

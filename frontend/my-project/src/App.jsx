@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from "../src/common/ProtectedRoute.jsx";
 import {TokenProvider} from './pages/account_pages/TokenProvider';
 import {UserProvider} from './pages/account_pages/UserProvider';
 import { MainMealProvider } from  './pages/home_page_comp/MainMealProvider';
@@ -8,7 +8,7 @@ import { SideMealsProvider } from  './pages/home_page_comp/SideMealsProvider';
 import AdminUsersListPage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUsersListPage.jsx'
 import AdminUserDetailPage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserDetailPage.jsx'
 import AdminUserUpdatePage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserUpdatePage.jsx'
-// import AdminUserDeletePage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserDeletePage.jsx'
+import AdminUserDeleteConfirmPage from '../src/pages_admin/admin_crud_pages/user_crud/AdminUserDeleteConfirmPage.jsx'
 // admin
 import AdminLayout from '../src/pages_admin/admination_pages/AdminLayout.jsx';
 import AdminDashboard from '../src/pages_admin/admination_pages/AdminDashboard.jsx'; 
@@ -86,6 +86,7 @@ const App = () => {
                                         <Route path="user-list"          element={<AdminUsersListPage />} />
                                         <Route path="user-detail/:id"    element={<AdminUserDetailPage />} />
                                         <Route path="user-update/:id"    element={<AdminUserUpdatePage />} />
+                                        <Route path="user-delete-confirm/:id"    element={<AdminUserDeleteConfirmPage />} />
                                         {/* <Route path="user-delete/:id"    element={<AdminUserDeletePage />} />   */}
                                         
                                         {/* clients  */}

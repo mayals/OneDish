@@ -12,7 +12,7 @@ import { TokenContext }       from '../account_pages/TokenContext';
 
 
 import { ToastContainer, toast } from "react-toastify";
-import Loading from "../../Loading.jsx"
+import Loading from "../../common/Loading"
 
 
 

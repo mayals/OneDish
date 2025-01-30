@@ -2,7 +2,7 @@ import axios from "axios"
 import { useState , useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import { baseURL } from "../../api/Api.js"
-import Loading from "../../Loading";
+import Loading from "../../common/Loading.jsx";
 import notify from "../../common/UseNotification.js"
 import { ToastContainer, toast } from 'react-toastify';
 
