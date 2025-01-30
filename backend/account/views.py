@@ -193,11 +193,8 @@ class ListUserAPIView(views.APIView):
     def get(self, request, format=None):
         users = UserModel.objects.all()
         serializer = self.serializer_class(users, many=True)
-        return response.Response({
-                "all_users_count":users.count(),
-                "all_users_data":serializer.data,
-                }, status=status.HTTP_200_OK)
-        
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
+                
            
 #  UserDetail by id -  by admin only 
 #  path('user-detail/<str:id>/', views.UserDetailAPIView.as_view(), name='user-detail'),    
