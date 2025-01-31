@@ -68,7 +68,7 @@ const Navbar = () => {
             <nav className="pt-7 pb-3 bg-white md:w-full">
                 {/* Mobile Navbar */}
                 <div className="flex justify-between items-center px-4 md:hidden">
-                    <div className="flex  -center space-x-2">
+                    <div className="flex-center space-x-2">
                         <img src={logo} alt="OneDish Logo" className="w-10 h-10" />
                         <span className="text-3xl md:text-2xl font-bold text-[#e52609]">OneDish <span className='text-xs text-gray-500'>daily</span></span>
                     </div>

@@ -1,4 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import openIcon from "../../assets/open-text-book-svgrepo-com.svg"
+import logo from "../../assets/oneDishLogo.jpg";
+
 
 const AdminNavbar = ({ toggleSidebar }) => {
     const navigate = useNavigate();
@@ -17,24 +20,11 @@ const AdminNavbar = ({ toggleSidebar }) => {
                     onClick={toggleSidebar}
                     className="p-2 text-gray-700 hover:bg-gray-300 rounded-lg focus:outline-none md:hidden"
                 >
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M4 6h16M4 12h16m-7 6h7"
-                        ></path>
-                    </svg>
+                    <img src={openIcon} className="h-7 w-7 sm:h-7 sm:w-7" alt="openIcon" />
                 </button>
 
                 {/* Search Bar - Shrinks on smaller screens */}
-                <form className="flex-1 flex items-center max-w-sm">
+                {/* <form className="flex-1 flex items-center max-w-sm">
                     <div className="w-full">
                         <input
                             type="text"
@@ -52,16 +42,13 @@ const AdminNavbar = ({ toggleSidebar }) => {
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                         </svg>
                     </button>
-                </form>
+                </form> */}
 
-                {/* Home Button and Logo Placeholder */}
-                <div className="flex items-center gap-4">
-                    <NavLink to="/" className="text-gray-700 hover:text-gray-900">
-                        Home
+                {/* Logo Container - Added md:ml-auto */}
+                <div className="flex items-center md:ml-auto">
+                    <NavLink to="/">
+                        <img src={logo} className="bg-white rounded-sm h-10 w-10" alt="Logo" />
                     </NavLink>
-                    <div className="bg-white p-2 rounded-lg">
-                        {/* Placeholder for logo */}
-                    </div>
                 </div>
             </div>
         </nav>
