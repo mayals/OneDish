@@ -14,7 +14,6 @@ import dashboardIcon from "../../assets/dashboard-alt-svgrepo-com.svg";
 
 
 const AdminSidebar = () => {
-    const navigate = useNavigate();
     const [toggle1, setToggle1] = useState(false);
     const [toggle2, setToggle2] = useState(false);
     const [toggle3, setToggle3] = useState(false);
@@ -22,9 +21,7 @@ const AdminSidebar = () => {
     const { accessToken } = useContext(TokenContext);
     const { user } = useContext(UserContext);
 
-    if (!accessToken) {
-        navigate('/login');
-    }
+   
 
     return (
         <section className="bg-gradient-to-b from-gray-800 to-gray-900 min-h-screen text-white p-4 shadow-xl">

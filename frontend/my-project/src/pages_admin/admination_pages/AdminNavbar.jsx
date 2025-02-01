@@ -1,56 +1,120 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import openIcon from "../../assets/open-text-book-svgrepo-com.svg"
 import logo from "../../assets/oneDishLogo.jpg";
+import bellIcon from "../../assets/bell-svgrepo-com.svg"
+import settingsIcon from "../../assets/setting-svgrepo-com.svg"
+import chevronIcon from "../../assets/chevron-selector-horizontal-svgrepo-com.svg"
+import inboxesIcon from "../../assets/inbox-svgrepo-com.svg"
+import noteIcon from "../../assets/note-svgrepo-com.svg"
 
 
 const AdminNavbar = ({ toggleSidebar }) => {
-    const navigate = useNavigate();
+   
 
-    // Check if the user is authenticated
-    const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-        navigate('/login');
-    }
+
 
     return (
-        <nav className="bg-gray-200 text-white p-3">
+        <nav className="bg-gradient-to-r from-gray-800 to-gray-900 shadow-lg p-4 z-10">
             <div className="flex items-center justify-between gap-4">
-                {/* Hamburger Menu for Mobile */}
-                <button
-                    onClick={toggleSidebar}
-                    className="p-2 text-gray-700 hover:bg-gray-300 rounded-lg focus:outline-none md:hidden"
-                >
-                    <img src={openIcon} className="h-7 w-7 sm:h-7 sm:w-7" alt="openIcon" />
-                </button>
-
-                {/* Search Bar - Shrinks on smaller screens */}
-                {/* <form className="flex-1 flex items-center max-w-sm">
-                    <div className="w-full">
-                        <input
-                            type="text"
-                            id="simple-search"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Search branch name..."
-                            required
-                        />
-                    </div>
+                {/* Left Section - Hamburger & Logo */}
+                <div className="flex items-center gap-4">
+                    {/* Mobile Menu Toggle */}
                     <button
-                        type="submit"
-                        className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        onClick={toggleSidebar}
+                        className="p-2 text-[#ffd8a8] hover:bg-gray-700 rounded-lg transition-all duration-200 md:hidden"
                     >
-                        <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
+                        <img 
+                            src={openIcon} 
+                            className="h-6 w-6 filter-orange" 
+                            alt="Menu" 
+                        />
                     </button>
-                </form> */}
-
-                {/* Logo Container - Added md:ml-auto */}
-                <div className="flex items-center md:ml-auto">
-                    <NavLink to="/">
-                        <img src={logo} className="bg-white rounded-sm h-10 w-10" alt="Logo" />
+    
+                    {/* Logo */}
+                    <NavLink 
+                        to="/" 
+                        className="hidden md:block hover:scale-105 transition-transform duration-200"
+                    >
+                        <img 
+                            src={logo} 
+                            className="h-10 w-10 rounded-full border-2 border-[#ffd8a8] p-1" 
+                            alt="Logo" 
+                        />
                     </NavLink>
                 </div>
+    
+                {/* Quick Access Suggestions (Optional) */}
+                <div className="hidden md:flex items-center justify-center gap-5">
+                    <button className="flex items-center gap-2 text-[#ffd8a8] hover:text-white transition-colors">
+                        <img src={inboxesIcon} className="h-5 w-5 filter-orange" alt="" />
+                        <span>Inboxes</span>
+                    </button>
+                    <button className="flex items-center gap-2 text-[#ffd8a8] hover:text-white transition-colors">
+                        <img src={noteIcon} className="h-5 w-5 filter-orange" alt="" />
+                        <span>Notes</span>
+                    </button>
+                </div>
+
+
+                {/* Right Section - Controls */}
+                <div className="flex items-center gap-5">
+                    {/* Notification Bell */}
+                    <button className="relative p-2 group">
+                        <div className="relative">
+                            <img
+                                src={bellIcon}
+                                className="h-6 w-6 filter-orange transition-transform group-hover:scale-110"
+                                alt="Notifications"
+                            />
+                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center animate-pulse">
+                                3
+                            </span>
+                        </div>
+                    </button>
+    
+                    {/* Settings Dropdown */}
+                    <div className="relative group">
+                        <button className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded-lg transition-all duration-200">
+                            <img
+                                src={settingsIcon}
+                                className="h-6 w-6 filter-orange"
+                                alt="Settings"
+                            />
+                            <span className="text-[#ffd8a8] hidden md:block">Admin</span>
+                            <img
+                                src={chevronIcon}
+                                className="h-4 w-4 filter-orange transform transition-transform"
+                                alt="▼"
+                            />
+                        </button>
+    
+                        {/* Dropdown Menu */}
+                        <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-xl invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 origin-top-right z-10">
+                            <NavLink
+                                to="/admin-profile"
+                                className="block px-4 py-3 text-gray-300 hover:bg-[#ffd8a8] hover:text-gray-900 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                            >
+                                👤 Profile Settings
+                            </NavLink>
+                            <button
+                                // onClick={handleLogout}
+                                className="w-full text-left px-4 py-3 text-gray-300 hover:bg-[#ffd8a8] hover:text-gray-900 transition-colors first:rounded-t-lg last:rounded-b-lg"
+                            >
+                                🚪 Sign Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+    
+            
+    
+            {/* Add to your CSS */}
+            <style jsx>{`
+                .filter-orange {
+                    filter: invert(84%) sepia(19%) saturate(1192%) hue-rotate(329deg) brightness(107%) contrast(101%);
+                }
+            `}</style>
         </nav>
     );
 };

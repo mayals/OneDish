@@ -16,8 +16,9 @@ import userIcon  from "../../../assets/user-male-svgrepo-com.svg"
 import {AxiosInstance} from "../../../api/AxiosInstance.js"
 
 
-
 const AdminUserListPage = () => {
+
+  
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // filter value
@@ -25,6 +26,9 @@ const AdminUserListPage = () => {
   // Get context values
   const { accessToken } = useContext(TokenContext);
   const { user, role }  = useContext(UserContext);
+
+  
+
 
 
   useEffect(() => {
@@ -59,10 +63,10 @@ const AdminUserListPage = () => {
 
   return (
 
-    <section className="px-4 sm:px-6 lg:px-8 py-8">
+    <section className="px-4 sm:px-6 lg:px-8">
       {loading && <Loading />}
       <ToastContainer />
-      {user.profile.profile_picture}
+      <h2 className='text-center text-xl py-2'>Users List</h2>
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="min-w-full inline-block align-middle">
