@@ -199,7 +199,35 @@ class ListUserAPIView(views.APIView):
         # print('no paginated serializer=',serializer)
         return response.Response(serializer.data, status=status.HTTP_200_OK)
         
+
+
+
+# clients list 
+# path('list-client/', views.ListUserAPIView.as_view(), name='list-client'),
+class ListClientAPIView(views.APIView):
+    serializer_class   = UserSerializer
+    permission_classes = [permissions.IsAdminUser]
+    pagination_class   = CustomPagination
+    
+    def get(self, request, format=None):
+        queryset = UserModel.objects.filter(is_client=True)
+        print('client queryset=',queryset)
+        #  with Apply pagination
+        paginator = self.pagination_class()
+        paginated_queryset = paginator.paginate_queryset(queryset, request)
         
+        if paginated_queryset is not None:
+            serializer = self.serializer_class(paginated_queryset, many=True)
+            # print('paginated serializer=',serializer)
+            return paginator.get_paginated_response(serializer.data)
+
+        # If no pagination, return the full queryset
+        serializer = self.serializer_class(queryset, many=True)
+        # print('no paginated serializer=',serializer)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
+        
+        
+       
        
 
                 

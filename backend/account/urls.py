@@ -20,13 +20,16 @@ urlpatterns = [
     path('testing/', views.TestingAuthenticatedReq.as_view(), name='just-for-testing'),
     
     
-    #  for admin only
+    #  for admin only  ####
     #  user
     path('list-user/', views.ListUserAPIView.as_view(), name='list-user'),
     path('user-detail/<str:id>/', views.DetailUserAPIView.as_view(), name='user-detail'),
     path('user-update/<str:id>/', views.UpdateUserAPIView.as_view(), name='user-update'),
     path('user-delete/<str:id>/', views.DeleteUserAPIView.as_view(), name='user-delete'),
-   
+    # client
+    path('list-client/', views.ListClientAPIView.as_view(), name='list-client'),
+
+    
     
     #  for request user only
     path('request-user/', views.DetailRequestUserAPIView.as_view(), name='request-user'),
