@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSearchParams } from "react-router";
+import { Link } from 'react-router-dom';
 // context 
 import { UserContext } from '../../../../src/pages/account_pages/UserContext.jsx';
 import { TokenContext }  from '../../../../src/pages/account_pages/TokenContext.jsx';
@@ -21,105 +20,52 @@ import {AxiosInstance} from "../../../api/AxiosInstance.js"
 
 
 const AdminUserListPage = () => {
-    const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  
     // Get context values
-    const { accessToken } = useContext(TokenContext);
-    const { user, role }  = useContext(UserContext);
-    
-    // state
-    const [loading, setLoading] = useState(false);
-    //  filter by user.role -- radio buttons 
-    // Add useSearchParams hook
-    const [searchParams] = useSearchParams();
-    
-    // Modify initial state to check URL params
-    const [showAllUsers, setShowAllUsers] = useState(searchParams.get('role') !== 'client');
-       
-    
+  const { accessToken } = useContext(TokenContext);
+  const { user, role }  = useContext(UserContext);
 
-    // filter by email, fullName -- search form
-    const [searchTerm, setSearchTerm] = useState(''); // filter value  
-    ////// pagination //////////////////////////////////////////
-    const [page, setPage] = useState(1); // Track current page
-    const [count, setCount ] = useState();
-    const [users, setUsers] = useState([]); //results 
-    const [links, setLinks ] = useState();
-    const limit = 3; // Items(projects) per page
+
+
+  const [searchTerm, setSearchTerm] = useState(''); // filter value  
+  ////// pagination //////////////////////////////////////////
+  const [page, setPage] = useState(1); // Track current page
+  const [count, setCount ] = useState();
+  const [users, setUsers] = useState([]); //results 
+  const [links, setLinks ] = useState();
+  const limit = 3; // Items(projects) per page
 
   
-    if (user && role !== "Admin") {
-      console.log('role=',role)
-      toast.error( "You have no permission to reach this page"); 
-      navigate("/")
-    }
-    if (!accessToken) {
-      console.log('accessToken=',accessToken)
-      toast.error( "Your login is expired!"); 
-      navigate("/")
-    }
-
-  useEffect(() => {
-      const roleFromURL = searchParams.get('role');
-      if (roleFromURL === 'client') {
-          setShowAllUsers(false);
-      }else{
-          setShowAllUsers(true);
-      }
-
-  }, [searchParams]);
 
 
   useEffect(() => {
-      const fetchUsersResults = async({ limit, offset }) => {
+
+    const fetchUsersResults = async({ limit, offset }) => {
+      if (user && user.role === "Admin") {
+          console.log('user.role=',user.rule)
           console.log('limit=',limit)
           console.log('offset=',offset)
-          
           try {
             setLoading(true);
             const response = await AxiosInstance.get('account/list-user/?limit=${limit}&offset=${offset}');
-            console.log("API all users Response=", response); // Add this to verify structure
-            console.log("API all users Response.data=", response.data); // Add this to verify structure
+            console.log("API Response=", response); // Add this to verify structure
+            console.log("API Response.data=", response.data); // Add this to verify structure
             setUsers(response.data.results);
             setCount(response.data.count);
             setLinks(response.data.links);
+
             setLoading(false);
-        
+          
           } catch (error) {
             setLoading(false);
             toast.error(error.response?.data?.message || "Failed to load users");
           }
       }
-
-
-      const fetchClientsResults = async({ limit, offset }) => {
-        console.log('limit=',limit)
-        console.log('offset=',offset)
-        
-        try {
-          setLoading(true);
-          const response = await AxiosInstance.get('account/list-client/?limit=${limit}&offset=${offset}');
-          console.log("API clients Response=", response); // Add this to verify structure
-          console.log("API clients Response.data=", response.data); // Add this to verify structure
-          setUsers(response.data.results);
-          setCount(response.data.count);
-          setLinks(response.data.links);
-          setLoading(false);
-      
-        } catch (error) {
-          setLoading(false);
-          toast.error(error.response?.data?.message || "Failed to load clients");
-        }
-    }
-    
-      // results
-      if (showAllUsers === true){
-          // fetch all users
-          fetchUsersResults({ limit, offset: (page - 1) * limit });
-      }else{
-          // fetch clients only 
-          fetchClientsResults({ limit, offset: (page - 1) * limit });
-      }
-  }, [showAllUsers]);
+    };
+    // results
+    fetchUsersResults({ limit, offset: (page - 1) * limit });
+  }, []);
 // /////////////////////////////////////////////////////////////////
 
 
@@ -254,37 +200,6 @@ const handlePressedPage = (index) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-
-        {/* radio buttons fot filter by user.role */}
-        <div className="flex items-center space-x-4 ml-4">
-                <label className="flex items-center space-x-1">
-                    <input
-                        type="radio"
-                        checked={showAllUsers}
-                        onChange={() => {
-                            setShowAllUsers(true);
-                            setPage(1);
-                            navigate('/admin-layout/user-list');
-                        }}
-                        className="form-radio text-[#d27556] focus:ring-[#d27556]"
-                    />
-                    <span className="text-sm">All Users</span>
-                </label>
-                <label className="flex items-center space-x-1">
-                    <input
-                        type="radio"
-                        checked={!showAllUsers}
-                        onChange={() => {
-                            setShowAllUsers(false);
-                            setPage(1);
-                            navigate('/admin-layout/user-list?role=client');
-                        }}
-                        className="form-radio text-[#d27556] focus:ring-[#d27556]"
-                    />
-                    <span className="text-sm">Clients Only</span>
-                </label>
-        </div>
-       
 
         {/* Add User Button */}
         <button 

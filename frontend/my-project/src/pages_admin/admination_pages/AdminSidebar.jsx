@@ -106,14 +106,14 @@ const AdminSidebar = () => {
                                 👤 Users List
                             </NavLink>
                             <NavLink 
-                                to="/admin-layout/client-list" 
+                                to="/admin-layout/user-list?role=client"  // Modified to use query parameter
                                 className={({ isActive }) => 
                                     `block p-2 rounded-lg text-gray-300 hover:bg-amber-900/50 hover:text-white transition-colors duration-200 ${
                                         isActive ? 'bg-amber-900/30 text-white' : ''
                                     }`
                                 }
                             >
-                                👥 Clients
+                                👥 Clients Only
                             </NavLink>
                         </div>
                     )}

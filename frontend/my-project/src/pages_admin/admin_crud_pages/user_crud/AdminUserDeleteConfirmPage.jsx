@@ -81,7 +81,7 @@ const AdminUserDeleteConfirmPage = () => {
  
  
  
-     //////////////////////////////  after submit button clicked
+     //////////////////////////////  after confirm delete submit button clicked
      const handleDelete = async (e) => {
            e.preventDefault();
            // //////////////////////  validate fields ////////////////////////
@@ -185,7 +185,7 @@ const AdminUserDeleteConfirmPage = () => {
               </button>
       
               <Link
-                to="/users"
+                to="/admin-layout/user-list"
                 className="flex-1 py-3 px-6 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg
                          font-medium transition-colors duration-200 text-center"
               >
