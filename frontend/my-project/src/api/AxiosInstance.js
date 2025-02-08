@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 import dayjs from 'dayjs';
-
+import { useParams, Link,  useNavigate } from 'react-router-dom';
 
 
 
@@ -76,7 +76,8 @@ AxiosInstance.interceptors.request.use(
                 } catch (error) {
                     console.log('Failed to refresh token:', error);
                     localStorage.clear();
-                    // Optionally redirect to login page here
+                    const navigate= useNavigate()
+                    navigate('/login')
                     return Promise.reject(error);
                 }
             }

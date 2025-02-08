@@ -29,6 +29,7 @@ const AdminUserUpdatePage = () =>{
     const [isVerifiedEmail, setIsVerifiedEmail] = useState('');
     const [isActive, setIsActive] = useState('');
     const [userData, setUserData] = useState([]);
+    const [email, setEmail] = useState('');
   
 
    
@@ -76,6 +77,8 @@ const AdminUserUpdatePage = () =>{
         setLastName(userData.last_name);
         setIsVerifiedEmail(userData.is_verifiedEmail);
         setIsActive(userData.is_active);
+        setEmail(userData.email);
+
       }
     }, [userData]); // Add dependencies here
 
@@ -158,10 +161,10 @@ const AdminUserUpdatePage = () =>{
                 setUserData(response.data);
 
                 notify("User update successfully", "success"); 
-                // setTimeout(() => {
-                //     // Navigate after the 1.5-second delay
-                //     navigate("/admin-layout/user-list", { replace: true });
-                // }, 1500);
+                setTimeout(() => {
+                    // Navigate after the 1.5-second delay
+                    navigate("/admin-layout/user-list", { replace: true });
+                }, 1500);
                 setLoading(false);
                   
           } catch (error) {
@@ -198,9 +201,20 @@ const AdminUserUpdatePage = () =>{
               </option>
             ))}
           </select> */}
+          
 
           {/* User Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block font-medium">Email</label>
+              <input
+                  disabled
+                  type="text"
+                  name="email"
+                  value={email}
+                  className="w-full p-2 border rounded-md bg-yellow-100"
+                />
+            </div>
             <div>
               <label className="block font-medium">First Name</label>
               <input
@@ -222,7 +236,7 @@ const AdminUserUpdatePage = () =>{
                 className="w-full p-2 border rounded-md"
               />
             </div>
-
+            
             <div>
               <label className="block font-medium">Is Verified Email?</label>
               <select
