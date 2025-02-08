@@ -1,11 +1,18 @@
+import random
 # django
 from django.contrib.auth import get_user_model, tokens
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponse, JsonResponse
 from django.utils.encoding import smart_str, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.conf import settings
 # RF
 from rest_framework import views, response, permissions, status
+from rest_framework_simplejwt.views import TokenObtainPairView
+# pagination
+from pagination.pagination import CustomPagination  
 # JWT
 from rest_framework_simplejwt.tokens import RefreshToken
 # local
@@ -14,21 +21,6 @@ from .models import UserModel, ClientProfile, AdminProfile, OneTimePassword
 from .serializers import  (RegisteUserProfileSerializer, OneTimePasswordSerializer, LoginSerializer,LogoutSerializer,
                            UserSerializer, UpdateUserSerializer, UpdateClientProfileSerializer,UpdateAdminProfileSerializer,
                            PasswordResetRequestSerializer, SetNewPasswordSerializer, ChangePasswordSerializer)
-
-from django.contrib.sites.shortcuts import get_current_site
-import random
-from django.core.mail import EmailMessage
-from django.conf import settings
-
- # send otp to email 
-from django.http import HttpResponse, JsonResponse
-
-
-from rest_framework_simplejwt.views import TokenObtainPairView
-   
-
-
-
 
 
 
@@ -187,13 +179,29 @@ class TestingAuthenticatedReq(views.APIView):
 #  path('list-user/', views.ListUserAPIView.as_view(), name='list-user'),
 # all usetrs list only for admin
 class ListUserAPIView(views.APIView):
-    serializer_class = UserSerializer
+    serializer_class   = UserSerializer
     permission_classes = [permissions.IsAdminUser]
+    pagination_class   = CustomPagination
     
     def get(self, request, format=None):
-        users = UserModel.objects.all()
-        serializer = self.serializer_class(users, many=True)
+        queryset = UserModel.objects.all()
+        #  with Apply pagination
+        paginator = self.pagination_class()
+        paginated_queryset = paginator.paginate_queryset(queryset, request)
+        
+        if paginated_queryset is not None:
+            serializer = self.serializer_class(paginated_queryset, many=True)
+            # print('paginated serializer=',serializer)
+            return paginator.get_paginated_response(serializer.data)
+
+        # If no pagination, return the full queryset
+        serializer = self.serializer_class(queryset, many=True)
+        # print('no paginated serializer=',serializer)
         return response.Response(serializer.data, status=status.HTTP_200_OK)
+        
+        
+       
+
                 
            
 #  UserDetail by id -  by admin only 
@@ -208,9 +216,7 @@ class DetailUserAPIView(views.APIView):
         print(id)
         user = get_object_or_404(UserModel, id=id)
         serializer = self.serializer_class(user, many=False)
-        return response.Response({
-                "user" : serializer.data,
-                }, status=status.HTTP_200_OK)
+        return response.Response(serializer.data, status=status.HTTP_200_OK)
  
 
 # update user selected  by id by admin only
@@ -233,7 +239,9 @@ class UpdateUserAPIView(views.APIView):
                 }, status=status.HTTP_403_FORBIDDEN)
         
         user = self.get_object(id)
+        print('selected user =',user)
         serializer = self.serializer_class(user, data=request.data)
+        print('serializer request.data =',request.data)
         print('serializer before validation =',serializer)
         if serializer.is_valid():
             serializer.save()

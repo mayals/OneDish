@@ -13,7 +13,7 @@ class UserModelAdmin(admin.ModelAdmin):
 
 @admin.register(AdminProfile)
 class AdminProfileAdmin(admin.ModelAdmin):
-    list_display  = ['profile_picture', 'phone_number', 'country', 'gender']
+    list_display  = ['user', 'profile_picture', 'phone_number', 'country', 'gender']
     list_filter   = ['phone_number']
     search_fields = ['phone_number', 'country', 'gender']
 
@@ -22,7 +22,7 @@ class AdminProfileAdmin(admin.ModelAdmin):
 
 @admin.register(ClientProfile)
 class ClientProfileAdmin(admin.ModelAdmin):
-    list_display  = ['profile_picture', 'phone_number', 'country', 'gender']
+    list_display  = ['user', 'profile_picture', 'phone_number', 'country', 'gender']
     list_filter   = ['phone_number']
     search_fields = ['phone_number', 'country', 'gender']
 

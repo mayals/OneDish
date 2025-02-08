@@ -44,8 +44,8 @@ class AdminProfileSerializer(serializers.ModelSerializer):
 class RegisteUserProfileSerializer(serializers.ModelSerializer):
     password       = serializers.CharField(max_length=68, min_length=6, write_only=True)
     password2      = serializers.CharField(max_length=68, min_length=6, write_only=True)
-    client_profile       = serializers.SerializerMethodField()
-    admin_profile       = serializers.SerializerMethodField()
+    client_profile = serializers.SerializerMethodField()
+    admin_profile  = serializers.SerializerMethodField()
     
     class Meta:
         model = UserModel
@@ -272,7 +272,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = UserModel
-        fields = ['id', 'role','first_name', 'last_name','email','is_verifiedEmail','date_joined','last_login', 'profile','full_name','is_verifiedEmail']
+        fields = ['id', 'role','first_name', 'last_name','email','is_verifiedEmail','is_active','date_joined','last_login', 'profile','full_name','is_verifiedEmail']
         read_only_fields = ['id','is_verifiedEmail', 'date_joined', 'last_login',
                            'is_superuser', 'is_active', 'is_staff','is_client', 'is_employee','full_name'
                            ]  
@@ -324,13 +324,15 @@ class SimplifiedUserSerializer(serializers.ModelSerializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ['first_name', 'last_name', 'is_verifiedEmail']
-        read_only_fields = ('is_superuser', 'is_active', 'is_staff','role',)
+        fields = ['first_name', 'last_name', 'is_verifiedEmail', 'is_active']
+        read_only_fields = ('is_superuser','is_staff','role')
 
         def update(self, instance, validated_data): # work ok 
+            print('validated_data=',validated_data)
             instance.first_name = validated_data.get('first_name', instance.first_name)
             instance.last_name  = validated_data.get('last_name', instance.last_name)
             instance.is_verifiedEmail  = validated_data.get('is_verifiedEmail', instance.is_verifiedEmail)
+            instance.is_active  = validated_data.get('is_active', instance.is_active)
             instance.save()
             user = UserModel(instance)
             user.save()
