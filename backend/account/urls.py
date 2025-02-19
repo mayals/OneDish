@@ -33,7 +33,9 @@ urlpatterns = [
     
     #  for request user only
     path('request-user/', views.DetailRequestUserAPIView.as_view(), name='request-user'),
-    path('update-user-profile/', views.UpdateRequestProfileAPIView.as_view(), name='update-user-profile'), # general any type of user client or admin 
+    path('request-user-profile/', views.RequestUserProfileAPIView.as_view(), name='request-user-profile'), # general any type of user client or admin 
+    path('update-request-user-profile/', views.UpdateRequestUserProfileAPIView.as_view(), name='update-request-user-profile'), # general any type of user client or admin 
+
     # path('update-admin-profile/', views.UpdateRequestAdminProfileAPIView.as_view(), name='update-user-profile'),
     # path('update-client-profile/', views.UpdateRequestClientProfileAPIView.as_view(), name='update-user-profile'),
 

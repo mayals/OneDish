@@ -302,7 +302,7 @@ class UserSerializer(serializers.ModelSerializer):
         
 #  we will use this user serializer in project reviews list page 
 class SimplifiedUserSerializer(serializers.ModelSerializer):
-    profile = serializers.SerializerMethodField()
+    profile   = serializers.SerializerMethodField()
     full_name = serializers.SerializerMethodField()
 
     class Meta:
@@ -340,7 +340,22 @@ class UpdateUserSerializer(serializers.ModelSerializer):
             return super().update(instance, validated_data)  
       
  
-           
+ 
+
+class ClientProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientProfile
+        fields = ['user', 'date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model
+
+class AdminProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdminProfile
+        fields = ['user', 'date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model
+    
+##################################################################          
+
+
+
 
 class UpdateClientProfileSerializer(serializers.ModelSerializer):
     user = UpdateUserSerializer(required=True,many=False)
@@ -366,21 +381,19 @@ class UpdateAdminProfileSerializer(serializers.ModelSerializer):
     user = UpdateUserSerializer(required=True)
     class Meta:
         model = AdminProfile
-        fields = ['user', 'date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model
+        fields = ['user','date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model
 
     def update(self, instance, validated_data): # Update AdminProfile fields + User fields
-        print('validated_data',validated_data)
+        print('validated_data=',validated_data)
         user_data = validated_data.pop('user', None)
         # updae User fields -- not work because user data_data = None !
         if user_data:
             user = instance.user
             for attr, value in user_data.items():
-                if attr in ['first_name', 'last_name']:
+                if attr in ['first_name','last_name']:
                     setattr(user, attr, value)
             user.save()
         return super().update(instance, validated_data)
-
-
 ###########################################################################################################################
 
 

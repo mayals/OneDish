@@ -19,7 +19,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .utils import send_generated_otp_to_email
 from .models import UserModel, ClientProfile, AdminProfile, OneTimePassword
 from .serializers import  (RegisteUserProfileSerializer, OneTimePasswordSerializer, LoginSerializer,LogoutSerializer,
-                           UserSerializer, UpdateUserSerializer, UpdateClientProfileSerializer,UpdateAdminProfileSerializer,
+                           UserSerializer, UpdateUserSerializer, AdminProfileSerializer, ClientProfileSerializer, UpdateClientProfileSerializer,UpdateAdminProfileSerializer,
                            PasswordResetRequestSerializer, SetNewPasswordSerializer, ChangePasswordSerializer)
 
 
@@ -326,10 +326,12 @@ class DetailRequestUserAPIView(views.APIView):
         return response.Response(serializer.data, status=status.HTTP_200_OK)
 
   
+  
+  
     
 ##############################update profile by request.user only #############33333
 # only request user can update his profile(  general for client or admin) 
-class UpdateRequestProfileAPIView(views.APIView):
+class UpdateRequestUserProfileAPIView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
     
     def put(self, request, *args, **kwargs):
@@ -351,6 +353,7 @@ class UpdateRequestProfileAPIView(views.APIView):
             print("Serializer is valid")  # Debugging line
             self.perform_update(serializer,user)
             return response.Response(serializer.data, status=status.HTTP_200_OK)
+        
         print("Serializer errors:", serializer.errors)  # Debugging line
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    
@@ -369,6 +372,36 @@ class UpdateRequestProfileAPIView(views.APIView):
 
 
 
+
+class RequestUserProfileAPIView(views.APIView):
+    permission_classes = [permissions.IsAuthenticated]  # Ensure this line is uncommented
+
+    def get(self, request, *args, **kwargs):
+        try:
+            user = get_object_or_404(UserModel, id=request.user.id)
+            print('request.user=', request.user)
+        
+        except UserModel.DoesNotExist:
+            print('request.user=', "not found request user")
+            return response.Response(status=status.HTTP_404_NOT_FOUND)
+        
+        
+        if user.is_superuser == True:
+                        try:
+                            instance_admin_profile = AdminProfile.objects.get(user=request.user)
+                            serializer = AdminProfileSerializer(instance_admin_profile)
+                            return response.Response(serializer.data, status=status.HTTP_200_OK)
+                        except AdminProfile.DoesNotExist:
+                            return response.Response({'error': 'Admin Profile not found'}, status=status.HTTP_404_NOT_FOUND)  
+        if request.user.is_client == True:
+                        try:
+                            instance_client_profile = ClientProfile.objects.get(user=request.user)
+                            serializer = ClientProfileSerializer(instance_client_profile)
+                            return response.Response(serializer.data, status=status.HTTP_200_OK)
+                        except ClientProfile.DoesNotExist:
+                            return response.Response({'error': 'Client Profile not found'}, status=status.HTTP_404_NOT_FOUND)                 
+                        
+        
 
 # class UpdateRequestClientProfileAPIView(views.APIView):
 #     serializer_class = UpdateClientProfileSerializer
@@ -468,6 +501,7 @@ class PasswordResetConfirm(views.APIView):
 
         except DjangoUnicodeDecodeError as identifier:
             return response.Response({'message':'password reset token is invalid or has expired'}, status=status.HTTP_401_UNAUTHORIZED)
+
 
 
 ### 3- Set New Password ###########  
