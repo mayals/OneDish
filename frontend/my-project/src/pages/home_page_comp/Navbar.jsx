@@ -26,9 +26,10 @@ const Navbar = () => {
     // Get user
     const { user, role, setUser, setRole} = useContext(UserContext);
 
+    console.log('from context accessToken=', accessToken);
     console.log('from context user=',user);
     console.log('from context role=',role);
-    console.log('from context accessToken=', accessToken);
+ 
 
     
     
@@ -68,7 +69,7 @@ const Navbar = () => {
             <nav className="pt-7 pb-3 bg-white md:w-full">
                 {/* Mobile Navbar */}
                 <div className="flex justify-between items-center px-4 md:hidden">
-                    <div className="flex-center space-x-2">
+                    <div className="flex flex-center space-x-2">
                         <img src={logo} alt="OneDish Logo" className="w-10 h-10" />
                         <span className="text-3xl md:text-2xl font-bold text-[#e52609]">OneDish <span className='text-xs text-gray-500'>daily</span></span>
                     </div>
@@ -113,37 +114,39 @@ const Navbar = () => {
                         </ul>
 
                         {/* Call-to-Action Button  -  Mobile Menu Links  */}
-                        {!accessToken ? (
-                <div className="ml-8 md:mt-2">
-                    {/* No authenticated - no access token */}
-                    <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                        الدخول                        
-                    </a>
-                </div>
-                ) : (
-                    <div className="flex items-center justify-center">
-                        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                            {user.profile_picture ? (
-                                <img
-                                    className="rounded-full w-8 h-8 mr-2"
-                                    src={`http://localhost:8000${user.profile_picture}`} 
-                                    alt={user.first_name || 'Profile'}
-                                />
-                            ) : (
-                                <img 
-                                    src={userIcon} 
-                                    className="w-5 h-5 mr-2"
-                                    alt="unknown user avatar"
-                                />    
-                            )}
-                            <div> 
-                                {user.first_name}   
-                            </div> 
-                        </a>
-                    </div>
-                )}
-                    </div>
-                )}
+                        {!accessToken ?
+                            (
+                                <div className="ml-8 md:mt-2">
+                                    {/* No authenticated - no access token */}
+                                    <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                                        الدخول                        
+                                    </a>
+                                </div>
+                            ) : ( user?.profile?.profile_picture && profileLinks[role] ?
+                                    (<div className="flex items-center justify-center">
+                                        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                                            <img
+                                                className="rounded-full w-8 h-8 mr-2"
+                                                src={`http://localhost:8000${user.profile.profile_picture}`} 
+                                                alt={user.first_name || 'Profile'}
+                                            />             
+                                        </a>
+                                    </div>)
+                                    :
+                                    (<div className="flex items-center justify-center">
+                                        <img 
+                                            src={userIcon} 
+                                            className="w-5 h-5 mr-2"
+                                            alt="unknown user avatar"
+                                        />    
+                                    </div>)
+                                    
+                                )    
+                        }                                     
+                </div>)}
+
+
+
 
                 {/* Full-Screen Navbar */}
                 <div className="hidden md:flex md:justify-between md:items-center px-8">
@@ -182,42 +185,35 @@ const Navbar = () => {
                     </ul>
 
                     {/* Call-to-Action Button */}
-                    {!accessToken?(<div className="ml-8 md:mt-2">
-                                        {/* No authenticated - no access token */}
-                                        <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold  py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                                           الدخول                        
+                    {!accessToken ?
+                            (
+                                <div className="ml-8 md:mt-2">
+                                    {/* No authenticated - no access token */}
+                                    <a href="http://localhost:5173/OneDish/login" className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                                        الدخول                        
+                                    </a>
+                                </div>
+                            ) : ( user?.profile?.profile_picture && profileLinks[role] ?
+                                    (<div className="flex items-center justify-center">
+                                        <a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="flex items-center text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300">
+                                            <img
+                                                className="rounded-full w-8 h-8 mr-2"
+                                                src={`http://localhost:8000${user.profile.profile_picture}`} 
+                                                alt={user.first_name || 'Profile'}
+                                            />             
                                         </a>
-                                    </div>):
-                                    (<a href={`http://localhost:5173/OneDish${profileLinks[role]}`} className="text-white bg-[#bc9b79] hover:bg-yellow-800 font-bold  py-2 px-4 rounded-lg shadow-md transition-all duration-300">
-                                    <div className='flex flex-row justify-around gap-1'> 
-                                        <span>
-                                            { user.profile_picture ?
-                                                (
-                                                    <img
-                                                        className="rounded-full"
-                                                        width="60px"
-                                                        height="60px"
-                                                        src={`http://localhost:8000${user.profile_picture}`} 
-                                                        alt={user.first_name || 'Profile'}
-                                                    />
-                                                ) 
-                                                :
-                                                (       
-                                                    <img 
-                                                        src={userIcon} 
-                                                        width="20px"
-                                                        height="20px"
-                                                        alt="unknown user avatar"
-                                                    />    
-                                                )
-                                            } 
-                                        </span>  
-                                        <span> 
-                                            {user.first_name}   
-                                        </span> 
-                                    </div>
-                                </a>)
-                    }
+                                    </div>)
+                                    :
+                                    (<div className="flex items-center justify-center">
+                                        <img 
+                                            src={userIcon} 
+                                            className="w-5 h-5 mr-2"
+                                            alt="unknown user avatar"
+                                        />    
+                                    </div>)
+                                    
+                                )    
+                    }            
                 </div>
             </nav>
         </section>

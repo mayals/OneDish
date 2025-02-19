@@ -12,6 +12,8 @@ import AdminUserDeleteConfirmPage from '../src/pages_admin/admin_crud_pages/user
 // admin
 import AdminLayout from '../src/pages_admin/admination_pages/AdminLayout.jsx';
 import AdminDashboard from '../src/pages_admin/admination_pages/AdminDashboard.jsx'; 
+import AdminProfile from '../src/pages_admin/admination_pages/AdminProfile.jsx'
+import UpdateAdminProfile from '../src/pages_admin/admination_pages/UpdateAdminProfile.jsx'
 // client
 // import ClientDashboard from './pages_client/client_dashboard_pages/ClientDashboard.jsx'; 
 // visitors
@@ -87,6 +89,9 @@ const App = () => {
                                         <Route path="user-detail/:id"    element={<AdminUserDetailPage />} />
                                         <Route path="user-update/:id"    element={<AdminUserUpdatePage />} />
                                         <Route path="user-delete-confirm/:id"    element={<AdminUserDeleteConfirmPage />} />
+                                        {/* admin profile */}
+                                        <Route path="admin-profile"    element={<AdminProfile/>} />
+                                        <Route path="update-admin-profile"    element={<UpdateAdminProfile/>} />
                                         {/* <Route path="user-delete/:id"    element={<AdminUserDeletePage />} />   */}
                                         
                                         {/* clients  */}

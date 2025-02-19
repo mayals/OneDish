@@ -7,7 +7,7 @@ import Loading from "../../common/Loading.jsx";
 import { baseURL } from "../../api/Api.js"
 
 import { TokenContext } from "../account_pages/TokenContext";
-
+import { UserContext } from "../account_pages/UserContext";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Login = () => {
     //context 
     const { accessToken, refreshToken, setAccessToken, setRefreshToken } = useContext(TokenContext); 
     
-
+    const { fetchUserData } = useContext(UserContext);  // Import fetchUserData
 
 
     // State
@@ -83,6 +83,7 @@ const Login = () => {
             setAccessToken(response.data.access_token)
             setRefreshToken(response.data.refresh_token)
             
+            await fetchUserData();  // Call fetchUserData to update navbar immediately
 
             setLoading(false);
             toast("Login successful!", { type: "success" });

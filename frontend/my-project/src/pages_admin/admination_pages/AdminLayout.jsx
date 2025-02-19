@@ -3,6 +3,12 @@ import AdminNavbar from './AdminNavbar.jsx';
 import AdminSidebar from './AdminSidebar.jsx';
 import React, { useState, useRef, useEffect } from 'react';
 
+
+
+
+
+
+
 const AdminLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [navbarHeight, setNavbarHeight] = useState(0);
