@@ -324,8 +324,8 @@ class SimplifiedUserSerializer(serializers.ModelSerializer):
 class UpdateUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ['first_name', 'last_name', 'is_verifiedEmail', 'is_active']
-        read_only_fields = ('is_superuser','is_staff','role')
+        fields = ['first_name', 'last_name', 'is_verifiedEmail', 'email', 'is_active', 'is_superuser', 'is_staff', 'role']
+        read_only_fields = ('email', 'is_superuser', 'is_staff', 'role')
 
         def update(self, instance, validated_data): # work ok 
             print('validated_data=',validated_data)
@@ -343,11 +343,13 @@ class UpdateUserSerializer(serializers.ModelSerializer):
  
 
 class ClientProfileSerializer(serializers.ModelSerializer):
+    user = UpdateUserSerializer()
     class Meta:
         model = ClientProfile
         fields = ['user', 'date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model
 
 class AdminProfileSerializer(serializers.ModelSerializer):
+    user = UpdateUserSerializer() 
     class Meta:
         model = AdminProfile
         fields = ['user', 'date_of_birth','gender','phone_number','country', 'address','profile_picture']  # replace 'other_profile_fields' with actual fields from EmployeeProfile model

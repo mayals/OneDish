@@ -393,6 +393,7 @@ class RequestUserProfileAPIView(views.APIView):
                             return response.Response(serializer.data, status=status.HTTP_200_OK)
                         except AdminProfile.DoesNotExist:
                             return response.Response({'error': 'Admin Profile not found'}, status=status.HTTP_404_NOT_FOUND)  
+        
         if request.user.is_client == True:
                         try:
                             instance_client_profile = ClientProfile.objects.get(user=request.user)
