@@ -66,7 +66,7 @@ const AdminUserUpdatePage = () =>{
                   }
             };
       }
-    fetchUser();
+      fetchUser();
     }, [id]); // Add dependencies here
      
   

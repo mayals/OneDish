@@ -15,21 +15,31 @@ const AdminProfile = () => {
     const { user, role }  = useContext(UserContext);
     
       
-    const [profileData, setProfileData] = useState({
+    const [profileUserData, setProfileUserData] = useState({
+                                                    // profile
+                                                    phone_number: '',
+                                                    gender:'',
+                                                    date_of_birth:'',
+                                                    country: '',
+                                                    address: '',
+                                                    profile_picture: '',
+                                                    
+                                                    // user
                                                     user: {
                                                         first_name: '',
                                                         last_name: '',
                                                         email: '',
                                                         date_joined: '',
-                                                        is_active: false
+                                                        is_active: false,
+                                                        is_staff:false,
+                                                        is_superuser: false,
+                                                        is_verifiedEmail: false,
+                                                        role:''
                                                     },
-                                                    phone_number: '',
-                                                    gender:'',
-                                                    country: '',
-                                                    address: '',
-                                                    profile_picture: '',
-                                                    role: ''
+                                                   
                                         });
+
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
@@ -37,8 +47,8 @@ const AdminProfile = () => {
         const fetchAdminProfile = async () => {
             try {
                 const response = await AxiosInstance.get('/account/request-user-profile/');
-                console.log('response=',response)
-                setProfileData(response.data);
+                console.log('fetchAdminProfile response=',response)
+                setProfileUserData(response.data);
                 setLoading(false);
             
             } catch (err) {
@@ -48,7 +58,9 @@ const AdminProfile = () => {
         };
 
         fetchAdminProfile();
+        console.log('profileUserData=',profileUserData)
     }, []);
+
 
     if (loading) {
         return (
@@ -75,9 +87,9 @@ const AdminProfile = () => {
                     {/* Profile Header */}
                     <div className="flex items-center mb-8">
                         <div className="relative">
-                            {profileData.profile_picture ?(
+                            {profileUserData.profile_picture ?(
                                 <img 
-                                    src={`http://localhost:8000${profileData.profile_picture}`} 
+                                    src={`http://localhost:8000${profileUserData.profile_picture}`} 
                                     alt="Profile" 
                                     className="w-24 h-24 rounded-full object-cover border-4 border-blue-100"
                                 />
@@ -99,15 +111,15 @@ const AdminProfile = () => {
                         </div>
                         <div className="ml-6 items-center gap-4">
                             <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                                {user.first_name} {user.last_name} 
-                                {profileData.gender === "female" ? (
+                                {profileUserData.user.first_name} {profileUserData.user.last_name} 
+                                {profileUserData.gender === "female" ? (
                                     <img src={femaleIcon} className="h-[30px] w-[30px]" />
                                 ) : (
                                     <img src={maleIcon} className="h-[30px] w-[30px]" />
                                 )}
                             </h1>
                             <h1 className="text-gray-600">
-                                {user.role}
+                                {profileUserData.user.role}
                             </h1>
                         </div>
                         
@@ -118,12 +130,23 @@ const AdminProfile = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Personal Information */}
                         <div className="bg-gray-50 rounded-lg p-4">
-                            <h3 className="text-lg font-semibold text-gray-700 mb-4">Personal Information</h3>
+                            
                             <div className="space-y-3">
+                                <h3 className="text-lg font-semibold text-gray-700 mb-4">Personal Information</h3>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Email:</span>
-                                    <span className="text-gray-800">{user.email}</span>
+                                    <span className="text-gray-800">{profileUserData.user.email}</span>
                                 </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-gray-600">Date of Birth:</span>
+                                    <span className="text-gray-800">
+                                        {new Date(profileUserData.date_of_birth).toLocaleDateString()}
+                                    </span>
+                                </div>
+
+                                <br></br>
+
+                                <h3 className="text-lg font-semibold text-gray-700 mb-4">Account Information</h3>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Joined Date:</span>
                                     <span className="text-gray-800">
@@ -131,12 +154,18 @@ const AdminProfile = () => {
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
+                                    <span className="text-gray-600">Last Login:</span>
+                                    <span className="text-gray-800">
+                                        {new Date(user.last_login).toLocaleDateString()}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Status:</span>
-                                    <span className={`px-2 py-1 rounded-full text-sm ${ user.is_active
+                                    <span className={`px-2 py-1 rounded-full text-sm ${ profileUserData.user.is_active
                                                                                             ? 'bg-green-100 text-green-800' 
                                                                                             : 'bg-red-100 text-red-800'
                                                                                     }`}>
-                                        {user.is_active ? 'Active' : 'Inactive'}
+                                        {profileUserData.user.is_active ? 'Active' : 'Inactive'}
                                     </span>
                                 </div>
                             </div>
@@ -149,19 +178,19 @@ const AdminProfile = () => {
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Phone:</span>
                                     <span className="text-gray-800">
-                                        {profileData.phone_number || 'Not provided'}
+                                        {profileUserData.phone_number || 'Not provided'}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Country:</span>
                                     <span className="text-gray-800">
-                                        {profileData.country || 'Not provided'}
+                                        {profileUserData.country || 'Not provided'}
                                     </span>
                                 </div>
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Address:</span>
                                     <span className="text-gray-800 text-right">
-                                        {profileData.address || 'Not provided'}
+                                        {profileUserData.address || 'Not provided'}
                                     </span>
                                 </div>
                             </div>
