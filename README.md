@@ -6,3 +6,13 @@ The platform focuses on simplicity, clarity, and daily engagement by showcasing 
 
 ## Live Demo🔗:
 https://mayals.github.io/OneDish/
+
+
+## Features✨
+🍛 Display one featured dish per day
+🖼️ Dish image, description, and pricing
+🗓️ Daily dish update concept
+⚙️ Backend API for managing dish data
+🌐 Responsive frontend UI
+🔄 Frontend–Backend integration
+📦 Modular and scalable project structure
