@@ -9,7 +9,7 @@ https://mayals.github.io/OneDish/
 
 
 ## Features✨
-🍛 Display one featured dish per day/n
+🍛 Display one featured dish per day
 🖼️ Dish image, description, and pricing
 🗓️ Daily dish update concept
 ⚙️ Backend API for managing dish data
