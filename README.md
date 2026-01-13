@@ -16,4 +16,18 @@ https://mayals.github.io/OneDish/
 - ⚙️ Backend API for managing dish data  
 - 🌐 Responsive frontend UI  
 - 🔄 Frontend–Backend integration  
-- 📦 Modular and scalable project structure  
+- 📦 Modular and scalable project structure
+
+
+## 🛠️ Tech Stack
+
+Frontend
+- JavaScript
+- HTML5 / CSS3
+- Responsive UI
+- Hosted on GitHub Pages
+
+Backend
+- Python
+- RESTful API architecture
+- Structured data handling
