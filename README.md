@@ -43,12 +43,25 @@ The concept increases curiosity and daily return visits
 
 
 ## 🚀 Installation & Setup
-Backend
+
+
+### Docker 
+- docker-compose down -v
+- docker-compose build --no-cache
+- docker-compose up
+- docker-compose exec web python manage.py migrate
+- docker-compose exec web python manage.py createsuperuser
+
+
+
+### Backend
 - cd backend
 - pip install -r requirements.txt
 - python manage.py runserver
 
-Frontend
+
+
+### Frontend
 - cd frontend
 - open index.html
 
@@ -58,6 +71,10 @@ Frontend
 - Build a clean and focused product concept
 - Practice frontend–backend integration
 - Create a real, portfolio-ready application
+
+
+
+
 
 ## 👩‍💻 Author
 
