@@ -215,7 +215,7 @@ class LoginSerializer(serializers.ModelSerializer):
             'first_name'        : user.first_name,
             'last_name'         : user.last_name,
             'is_verifiedEmail'  : user.is_verifiedEmail,
-            'full_name'         : user.get_full_name,
+            'full_name'         : user.get_full_name(),
             'profile_picture'   : user.get_profile_picture,
             "access_token"      : str(tokens.get('access')),
             "refresh_token"     : str(tokens.get('refresh'))

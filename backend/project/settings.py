@@ -9,14 +9,19 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+# settings.py
+import os
 from pathlib import Path
 from datetime import timedelta
-import os
+
 # https://pypi.org/project/dj-database-url/
-import dj_database_url
+# import dj_database_url
 
 
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 
@@ -24,7 +29,8 @@ import dj_database_url
 # https://pypi.org/project/environs/#install
 from environs import Env  # read .env file, if it exists 
 env = Env()
-Env.read_env()
+Env.read_env()  # <-- loads variables from .env
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,10 +47,14 @@ print(SECRET_KEY)
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = [ '127.0.0.1','localhost']
 
+
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
+
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -169,22 +179,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATABASES = {
     # Development
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': os.getenv('DB_NAME'),
-
-        'USER': os.getenv('DB_USER'),
-
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-
-        'HOST': os.getenv('DB_HOST'),
-
-        'PORT': os.getenv('DB_PORT'),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),  # must be 'db'
+            'PORT': os.getenv('DB_PORT', '5432'),
     },
    
     # PRODUCTION
-    # 'default': dj_database_url.config( default=os.getenv('DATABASE_URL'), conn_max_age=600 )    
+        # 'default': dj_database_url.config( default=os.getenv('DATABASE_URL'), conn_max_age=600 )    
         
      
        

@@ -57,7 +57,7 @@ class UserModel(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-    @property
+    
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
     
@@ -117,10 +117,10 @@ class ClientProfile(models.Model):
     updated_at      = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return  self.user.get_full_name
+        return  self.user.get_full_name()
     
     def get_client_full_name(self):
-        return f"{self.user.get_full_name}"
+        return f"{self.user.get_full_name()}"
     
     def save(self, *args, **kwargs):
         # Set the Employee ID to be the same as the user ID
@@ -148,10 +148,10 @@ class AdminProfile(models.Model):
     updated_at      = models.DateTimeField(auto_now=True)
    
     def __str__(self):
-        return  self.user.get_full_name
+        return  self.user.get_full_name()
     
     def get_client_full_name(self):
-        return f"{self.user.get_full_name}"
+        return f"{self.user.get_full_name()}"
     
     def save(self, *args, **kwargs):
         # Set the Employee ID to be the same as the user ID
