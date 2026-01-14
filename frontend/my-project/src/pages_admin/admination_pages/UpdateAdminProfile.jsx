@@ -297,23 +297,40 @@ const UpdateAdminProfile = () => {
                         {/* profile_picture */}
                         <div>
                             <label htmlFor="profile_picture" className="text-gray-700">
-                                <div>
-                                    <span>Profile Picture</span>  
-                                    <img
-                                        className="w-16 h-16 bg-white rounded-lg mb-4 shrink-0"
-                                        src={ profilePicturePreview || `http://localhost:8000${profileUserData.profile_picture}`}            
-                                        alt="Current Profile Picture"
-                                        style={{ cursor: 'pointer' }}
-                                    />
+                                <div className='relative'>
+                                    <div>
+                                        <span>Profile Picture</span>  
+                                        <img
+                                            className="size-20 bg-white rounded-full mb-4 shrink-0 border-2 border-[#d0ccc6]"
+                                            src={ profilePicturePreview || `http://localhost:8000${profileUserData.profile_picture}`}            
+                                            alt="Current Profile Picture"
+                                           
+                                        />
+                                    </div>
+                                    {/* edit profile_picture  */}
+                                    <div className="absolute bottom-0 ml-[60px] bg-[#c77054] text-white rounded-full p-1.5"  style={{ cursor: 'pointer' }}>
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </label>
-                            <input 
+                            {/* <input 
                                 id="profile_picture"
                                 type="file" 
                                 required 
                                 name="profile_picture" 
                                 onChange={handleFileChange} 
                                 className="w-full p-2 border rounded" 
+                                accept="image/*"
+                            /> */}
+                            <input
+                                id="profile_picture"
+                                type="file"
+                                required 
+                                name="profile_picture" 
+                                onChange={handleFileChange}
+                                className="file:mr-4 file:rounded-full file:border-0 file:bg-yellow-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-yellow-700 hover:file:bg-yellow-100 dark:file:bg-yellow-600 dark:file:text-yellow-100 dark:hover:file:bg-yellow-500"
                                 accept="image/*"
                             />
                         </div>
@@ -333,7 +350,7 @@ const UpdateAdminProfile = () => {
 
                         <button
                             type="submit"
-                            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="w-full bg-[#c77054] hover:bg-[#724130] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         >
                             Update Profile
                         </button>
