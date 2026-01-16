@@ -19,6 +19,25 @@ https://mayals.github.io/OneDish/
 - 📦 Modular and scalable project structure
 
 
+## Screen Shot
+
+<img width="1877" height="823" alt="Screenshot 2026-01-16 135259" src="https://github.com/user-attachments/assets/315b42ac-5061-4018-bfa7-9a853cb1a7a1" />
+
+<img width="1877" height="823" alt="Screenshot 2026-01-16 135259" src="https://github.com/user-attachments/assets/335c7b38-e926-4638-9325-0d3620d35173" />
+
+
+<img width="1893" height="826" alt="Screenshot 2026-01-16 135327" src="https://github.com/user-attachments/assets/42ee3e1a-4f62-42eb-910e-704be835b0f6" />
+
+<img width="1892" height="829" alt="Screenshot 2026-01-16 135353" src="https://github.com/user-attachments/assets/78bef088-2b18-4c82-81bb-660d5c30453b" />
+
+<img width="1892" height="812" alt="Screenshot 2026-01-16 135414" src="https://github.com/user-attachments/assets/b5f72196-25a0-400a-99a9-b9fdd0eeb142" />
+
+
+## 🔗 Live Demo:
+https://mayals.github.io/OneDish/
+
+
+
 ## 🛠️ Tech Stack
 
 Frontend
