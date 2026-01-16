@@ -33,6 +33,10 @@ https://mayals.github.io/OneDish/
 <img width="1892" height="812" alt="Screenshot 2026-01-16 135414" src="https://github.com/user-attachments/assets/b5f72196-25a0-400a-99a9-b9fdd0eeb142" />
 
 
+
+<img width="1899" height="820" alt="Screenshot 2026-01-16 140005" src="https://github.com/user-attachments/assets/f9ebfc8a-af5d-484a-ba7f-224964e2fb4b" />
+
+
 ## 🔗 Live Demo:
 https://mayals.github.io/OneDish/
 
